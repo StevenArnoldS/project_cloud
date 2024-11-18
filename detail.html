@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail Item</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="bg-gray-900 shadow">
+      <div
+        class="max-w-screen-xl flex items-center justify-between mx-auto p-5"
+      >
+        <!-- Logo, displayed only on md and larger screens -->
+        <a
+          href="https://flowbite.com/"
+          class="hidden md:flex items-center space-x-3 rtl:space-x-reverse"
+        >
+          <img
+            src="https://flowbite.com/docs/images/logo.svg"
+            class="h-8"
+            alt="Flowbite Logo"
+          />
+          <span
+            class="self-center text-2xl font-semibold whitespace-nowrap text-white"
+            >E-commerce</span
+          >
+        </a>
+
+        <!-- Centered Full-width Search Bar -->
+        <div class="flex-1 flex justify-center pe-5">
+          <div class="relative w-full max-w-lg">
+            <div
+              class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+            >
+              <svg
+                class="w-4 h-4 text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+              <span class="sr-only">Search icon</span>
+            </div>
+            <input
+              type="text"
+              id="search-navbar"
+              class="block w-full p-2 ps-10 text-sm border rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
+              placeholder="Search..."
+            />
+          </div>
+        </div>
+
+        <!-- Right Side: Cart and User Profile -->
+        <div
+          class="flex items-center space-x-5 md:space-x-10 rtl:space-x-reverse"
+        >
+          <!-- Favorite Icon -->
+          <button
+            type="button"
+            class="text-gray-400 hover:text-white focus:outline-none"
+            aria-label="View favorite"
+          >
+            <i class="fa-solid fa-heart text-xl"></i>
+          </button>
+          <!-- Shopping Cart Icon -->
+          <button
+            type="button"
+            class="text-gray-400 hover:text-white focus:outline-none"
+            aria-label="View cart"
+          >
+            <i class="fas fa-shopping-cart text-xl"></i>
+          </button>
+
+          <!-- User Profile Icon and Dropdown Menu -->
+          <button
+            type="button"
+            class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-600"
+            id="user-menu-button"
+            aria-expanded="false"
+            data-dropdown-toggle="user-dropdown"
+            data-dropdown-placement="bottom"
+          >
+            <span class="sr-only">Open user menu</span>
+            <img
+              class="w-8 h-8 rounded-full"
+              src="https://static.vecteezy.com/system/resources/thumbnails/019/900/306/small_2x/happy-young-cute-illustration-face-profile-png.png"
+              alt="user photo"
+            />
+          </button>
+
+          <!-- Dropdown menu -->
+          <div
+            class="z-50 hidden my-4 text-base list-none divide-y rounded-lg shadow bg-gray-700 divide-gray-600"
+            id="user-dropdown"
+          >
+            <div class="px-4 py-3">
+              <span class="block text-sm text-white">Bonnie Green</span>
+              <span class="block text-sm truncate text-gray-400"
+                >name@flowbite.com</span
+              >
+            </div>
+            <ul class="py-2" aria-labelledby="user-menu-button">
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
+                  >Dashboard</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
+                  >Settings</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
+                  >Earnings</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
+                  >Sign out</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div
+      class="max-w-screen-xl mx-auto px-5 flex flex-col lg:flex-row gap-6 p-6"
+    >
+      <!-- Product Image and Thumbnails -->
+      <div class="flex flex-col items-center lg:items-start">
+        <!-- Gambar Utama -->
+        <img
+          id="main-image"
+          src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
+          alt="Product Image"
+          class="w-[30rem] h-[30rem] object-cover rounded-lg"
+        />
+        <!-- Thumbnail Gambar -->
+        <div id="thumbnail-container" class="flex gap-2 mt-4">
+          <img
+            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
+            alt="Thumbnail"
+            class="w-20 h-20 object-cover rounded-lg cursor-pointer"
+          />
+          <img
+            src="https://images.tokopedia.net/img/cache/700/VqbcmM/2022/10/6/c0d0fdd7-b9dd-4f9c-bdb1-8ba69b4f4fb5.jpg"
+            alt="Thumbnail"
+            class="w-20 h-20 object-cover rounded-lg cursor-pointer"
+          />
+          <img
+            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//catalog-image/91/MTA-142217910/no-brand_no-brand_full01.jpg"
+            alt="Thumbnail"
+            class="w-20 h-20 object-cover rounded-lg cursor-pointer"
+          />
+          <img
+            src="https://images.tokopedia.net/img/cache/700/VqbcmM/2024/2/5/d6bb912c-c5cb-417f-9464-51916fa5aeef.jpg"
+            alt="Thumbnail"
+            class="w-20 h-20 object-cover rounded-lg cursor-pointer"
+          />
+          <img
+            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/103/MTA-169737005/brd-44261_mainan-anak-blind-box-sanrio-dekorasi-karakter-kejutan-lucu-imut_full01-8bda2d7d.jpg"
+            alt="Thumbnail"
+            class="w-20 h-20 object-cover rounded-lg cursor-pointer"
+          />
+        </div>
+      </div>
+      <!-- Product Details -->
+      <div class="flex-1">
+        <div class="flex items-center gap-2">
+          <h1 class="text-2xl font-semibold">
+            PROMO TAS SLEMPANG UNTUK LAPTOP ALL BRAND
+          </h1>
+        </div>
+        <div class="flex space-x-5 items-center">
+          <p class="mt-2 text-3xl font-bold text-red-600">Rp175.000</p>
+          <div class="flex items-center mt-2 text-yellow-500 text-lg">
+            <span class="flex items-center">
+              5.0
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
+                />
+              </svg>
+            </span>
+            <span class="ml-2 text-gray-600">(3 Penilaian)</span>
+          </div>
+        </div>
+
+        <div class="mt-5 flex space-x-2 items-center">
+          <img
+            class="w-10 h-10 rounded-full"
+            src="https://static.vecteezy.com/system/resources/thumbnails/019/900/306/small_2x/happy-young-cute-illustration-face-profile-png.png"
+            alt="user photo"
+          />
+          <p class="text-lg font-bold">Skin1004 Official Shop</p>
+        </div>
+
+        <!-- Shipping & Location -->
+        <div class="mt-5 space-y-1 text-gray-600">
+          <div class="flex items-center gap-2">
+            <span class="text-green-600">Gratis Ongkir</span>
+            <span>Pengiriman Ke</span>
+            <span class="font-semibold">KOTA JAKARTA PUSAT</span>
+          </div>
+          <div>Ongkos Kirim Rp0 - Rp18.000</div>
+        </div>
+        <div class="mt-1 flex items-center gap-1">
+          <p class="text-gray-600">Kondisi:</p>
+          <p>Baru</p>
+        </div>
+        <div class="mt-1 flex items-center gap-1">
+          <p class="text-gray-600">Min. Pemesanan:</p>
+          <p>1</p>
+        </div>
+        <div class="mt-3">
+          <p>Deskripsi produk:</p>
+          <div
+            class="description text-gray-700 text-sm max-h-36 overflow-hidden transition-all duration-300"
+            id="product-description"
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
+            quas magni porro, facere quae eos ipsum! Soluta iusto cum iure omnis
+            quaerat asperiores consequatur nostrum sequi voluptates? Minus,
+            neque sit. Deleniti quam ducimus molestias ut harum voluptates ipsam
+            qui recusandae veritatis asperiores impedit unde aliquid ipsa, eaque
+            veniam obcaecati earum laudantium vitae voluptas, in eum? Dicta qui,
+            iure possimus neque eligendi earum animi cupiditate accusantium
+            deserunt ratione fuga nisi placeat quia quasi laboriosam impedit
+            sapiente sint cumque in delectus asperiores aspernatur facere.
+            Voluptatum explicabo impedit error, libero corporis eum. Porro unde
+            aliquam, delectus a nulla deleniti quae? Corporis suscipit
+            voluptatem consequatur atque. Quam, voluptatum libero vel laudantium
+            sequi aliquid quisquam aspernatur laboriosam natus aperiam nemo
+            similique harum soluta neque consequatur necessitatibus possimus
+            odit facilis ipsum reiciendis? Quod dicta, magni laboriosam officia
+            sapiente quis eum impedit. Aspernatur sequi nostrum accusamus
+            laudantium sunt voluptates corporis tempora minus, fugit, soluta hic
+            voluptate sed!
+          </div>
+          <p
+            class="show-more font-semibold text-blue-500 cursor-pointer hidden"
+            id="show-more-button"
+          >
+            Show more
+          </p>
+        </div>
+
+        <!-- Quantity Selector -->
+        <div class="mt-1 flex items-center">
+          <span class="text-base font-semibold">Kuantitas</span>
+          <div class="flex items-center ml-4">
+            <!-- Form -->
+            <form class="max-w-xs mx-auto">
+              <!-- Wrapper untuk Vertically Centering -->
+              <div class="relative flex items-center space-x-2">
+                <button
+                  type="button"
+                  id="decrement-button"
+                  data-input-counter-decrement="counter-input"
+                  class="flex-shrink-0 bg-gray-700 hover:bg-gray-600 border-gray-600 inline-flex items-center justify-center border rounded-md h-5 w-5 focus:ring-0 focus:outline-none"
+                >
+                  <svg
+                    class="w-2.5 h-2.5 text-white"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 18 2"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M1 1h16"
+                    />
+                  </svg>
+                </button>
+                <input
+                  type="text"
+                  id="counter-input"
+                  data-input-counter
+                  class="flex-shrink-0 text-gray-900 border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center"
+                  value="0"
+                  readonly
+                  required
+                />
+                <button
+                  type="button"
+                  id="increment-button"
+                  data-input-counter-increment="counter-input"
+                  class="flex-shrink-0 bg-gray-700 hover:bg-gray-600 border-gray-600 inline-flex items-center justify-center border rounded-md h-5 w-5 focus:ring-0 focus:outline-none"
+                >
+                  <svg
+                    class="w-2.5 h-2.5 text-white"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 18 18"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 1v16M1 9h16"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mt-6 flex gap-4">
+          <button
+            class="flex-1 px-4 py-2 bg-[#959EC9] text-white font-semibold rounded-lg hover:bg-[#28264B]"
+          >
+            Masukkan Keranjang
+          </button>
+          <button
+            class="flex-1 px-4 py-2 bg-[#4E5174] text-white font-semibold rounded-lg hover:bg-[#28264B]"
+          >
+            Beli Sekarang
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-screen-xl mx-auto px-5 my-8">
+      <h2 class="text-xl font-bold mb-4">Ulasan Produk</h2>
+      <div class="space-y-6">
+        <!-- Review 1 -->
+        <div class="flex items-start space-x-4">
+          <img
+            class="w-10 h-10 rounded-full"
+            src="https://randomuser.me/api/portraits/men/32.jpg"
+            alt="Reviewer 1"
+          />
+          <div class="flex-1">
+            <div class="flex items-center">
+              <p class="font-semibold">Alex</p>
+              <span class="ml-2 text-sm text-gray-500">2 minggu lalu</span>
+            </div>
+            <div class="flex items-center text-yellow-500 text-sm">★★★★★</div>
+            <p class="mt-1 text-gray-800">Lucu bangett ✨✨✨</p>
+          </div>
+        </div>
+        <hr />
+
+        <!-- Review 2 -->
+        <div class="flex items-start space-x-4">
+          <img
+            class="w-10 h-10 rounded-full"
+            src="https://randomuser.me/api/portraits/women/44.jpg"
+            alt="Reviewer 2"
+          />
+          <div class="flex-1">
+            <div class="flex items-center">
+              <p class="font-semibold">Maria</p>
+              <span class="ml-2 text-sm text-gray-500">1 bulan lalu</span>
+            </div>
+            <div class="flex items-center text-yellow-500 text-sm">★★★★★</div>
+            <p class="mt-1 text-gray-800">
+              Sesuai ekspektasi! Barang bagus dan lucu banget 😍
+            </p>
+          </div>
+        </div>
+        <hr />
+
+        <!-- Review 3 -->
+        <div class="flex items-start space-x-4">
+          <img
+            class="w-10 h-10 rounded-full"
+            src="https://randomuser.me/api/portraits/men/45.jpg"
+            alt="Reviewer 3"
+          />
+          <div class="flex-1">
+            <div class="flex items-center">
+              <p class="font-semibold">Rendy</p>
+              <span class="ml-2 text-sm text-gray-500">3 minggu lalu</span>
+            </div>
+            <div class="flex items-center text-yellow-500 text-sm">★★★★☆</div>
+            <p class="mt-1 text-gray-800">Bagus tapi pengiriman agak lambat.</p>
+          </div>
+        </div>
+        <hr />
+
+        <!-- Review 4 -->
+        <div class="flex items-start space-x-4">
+          <img
+            class="w-10 h-10 rounded-full"
+            src="https://randomuser.me/api/portraits/women/30.jpg"
+            alt="Reviewer 4"
+          />
+          <div class="flex-1">
+            <div class="flex items-center">
+              <p class="font-semibold">Siti</p>
+              <span class="ml-2 text-sm text-gray-500">1 minggu lalu</span>
+            </div>
+            <div class="flex items-center text-yellow-500 text-sm">★★★★★</div>
+            <p class="mt-1 text-gray-800">
+              Barang aman sampai di rumah, kualitas sesuai harga 👍
+            </p>
+          </div>
+        </div>
+        <hr />
+
+        <!-- Review 5 -->
+        <div class="flex items-start space-x-4">
+          <img
+            class="w-10 h-10 rounded-full"
+            src="https://randomuser.me/api/portraits/men/52.jpg"
+            alt="Reviewer 5"
+          />
+          <div class="flex-1">
+            <div class="flex items-center">
+              <p class="font-semibold">David</p>
+              <span class="ml-2 text-sm text-gray-500">4 hari lalu</span>
+            </div>
+            <div class="flex items-center text-yellow-500 text-sm">★★★★★</div>
+            <p class="mt-1 text-gray-800">
+              Produk sangat memuaskan, sesuai deskripsi!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    // Mendapatkan elemen gambar utama
+    const mainImage = document.getElementById("main-image");
+    // Mendapatkan semua elemen thumbnail
+    const thumbnails = document.querySelectorAll("#thumbnail-container img");
+
+    // Menambahkan event listener pada setiap thumbnail
+    thumbnails.forEach((thumbnail) => {
+      thumbnail.addEventListener("click", () => {
+        // Mengganti src gambar utama dengan src thumbnail yang diklik
+        mainImage.src = thumbnail.src;
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const input = document.getElementById("counter-input");
+      const decrementButton = document.getElementById("decrement-button");
+
+      decrementButton.addEventListener("click", () => {
+        let currentValue = parseInt(input.value, 10);
+        if (currentValue == 0) {
+          input.value += 1;
+        }
+      });
+
+      const description = document.getElementById("product-description");
+      const showMoreButton = document.getElementById("show-more-button");
+
+      // Periksa apakah isi deskripsi melebihi max-height
+      if (description.scrollHeight > description.clientHeight) {
+        showMoreButton.classList.remove("hidden");
+      }
+
+      showMoreButton.addEventListener("click", () => {
+        const isExpanded = description.classList.toggle("max-h-36");
+        description.classList.toggle("overflow-hidden", isExpanded);
+        showMoreButton.textContent = isExpanded ? "Show more" : "Show less";
+      });
+    });
+  </script>
+</html>

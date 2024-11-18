@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homepage</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="bg-gray-900 shadow">
+      <div
+        class="max-w-screen-xl flex items-center justify-between mx-auto p-5"
+      >
+        <!-- Logo, displayed only on md and larger screens -->
+        <a
+          href="https://flowbite.com/"
+          class="hidden md:flex items-center space-x-3 rtl:space-x-reverse"
+        >
+          <img
+            src="https://flowbite.com/docs/images/logo.svg"
+            class="h-8"
+            alt="Flowbite Logo"
+          />
+          <span
+            class="self-center text-2xl font-semibold whitespace-nowrap text-white"
+            >E-commerce</span
+          >
+        </a>
+
+        <!-- Centered Full-width Search Bar -->
+        <div class="flex-1 flex justify-center pe-5">
+          <div class="relative w-full max-w-lg">
+            <div
+              class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+            >
+              <svg
+                class="w-4 h-4 text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+              <span class="sr-only">Search icon</span>
+            </div>
+            <input
+              type="text"
+              id="search-navbar"
+              class="block w-full p-2 ps-10 text-sm border rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
+              placeholder="Search..."
+            />
+          </div>
+        </div>
+
+        <!-- Right Side: Cart and User Profile -->
+        <div
+          class="flex items-center space-x-5 md:space-x-10 rtl:space-x-reverse"
+        >
+          <!-- Favorite Icon -->
+          <button
+            type="button"
+            class="text-gray-400 hover:text-white focus:outline-none"
+            aria-label="View favorite"
+          >
+            <i class="fa-solid fa-heart text-xl"></i>
+          </button>
+          <!-- Shopping Cart Icon -->
+          <button
+            type="button"
+            class="text-gray-400 hover:text-white focus:outline-none"
+            aria-label="View cart"
+          >
+            <i class="fas fa-shopping-cart text-xl"></i>
+          </button>
+
+          <!-- User Profile Icon and Dropdown Menu -->
+          <button
+            type="button"
+            class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-600"
+            id="user-menu-button"
+            aria-expanded="false"
+            data-dropdown-toggle="user-dropdown"
+            data-dropdown-placement="bottom"
+          >
+            <span class="sr-only">Open user menu</span>
+            <img
+              class="w-8 h-8 rounded-full"
+              src="https://static.vecteezy.com/system/resources/thumbnails/019/900/306/small_2x/happy-young-cute-illustration-face-profile-png.png"
+              alt="user photo"
+            />
+          </button>
+
+          <!-- Dropdown menu -->
+          <div
+            class="z-50 hidden my-4 text-base list-none divide-y rounded-lg shadow bg-gray-700 divide-gray-600"
+            id="user-dropdown"
+          >
+            <div class="px-4 py-3">
+              <span class="block text-sm text-white">Bonnie Green</span>
+              <span class="block text-sm truncate text-gray-400"
+                >name@flowbite.com</span
+              >
+            </div>
+            <ul class="py-2" aria-labelledby="user-menu-button">
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
+                  >Dashboard</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
+                  >Settings</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
+                  >Earnings</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
+                  >Sign out</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div
+      id="default-carousel"
+      class="relative max-w-screen-xl mx-auto md:my-4 px-5"
+      data-carousel="slide"
+    >
+      <!-- Carousel wrapper -->
+      <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+        <!-- Item 1 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+          <img
+            src="https://maxipro.co.id/wp-content/uploads/2022/02/COVER-ARTIKEL-ALT-100-Macam-macam-Ukuran-Banner-Sesuai-Standar-Yang-Ideal.png"
+            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt="..."
+          />
+        </div>
+        <!-- Item 2 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+          <img
+            src="https://maxipro.co.id/wp-content/uploads/2022/02/COVER-ARTIKEL-ALT-100-Macam-macam-Ukuran-Banner-Sesuai-Standar-Yang-Ideal.png"
+            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt="..."
+          />
+        </div>
+        <!-- Item 3 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+          <img
+            src="https://maxipro.co.id/wp-content/uploads/2022/02/COVER-ARTIKEL-ALT-100-Macam-macam-Ukuran-Banner-Sesuai-Standar-Yang-Ideal.png"
+            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt="..."
+          />
+        </div>
+        <!-- Item 4 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+          <img
+            src="https://maxipro.co.id/wp-content/uploads/2022/02/COVER-ARTIKEL-ALT-100-Macam-macam-Ukuran-Banner-Sesuai-Standar-Yang-Ideal.png"
+            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt="..."
+          />
+        </div>
+        <!-- Item 5 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+          <img
+            src="https://maxipro.co.id/wp-content/uploads/2022/02/COVER-ARTIKEL-ALT-100-Macam-macam-Ukuran-Banner-Sesuai-Standar-Yang-Ideal.png"
+            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt="..."
+          />
+        </div>
+      </div>
+      <!-- Slider indicators -->
+      <div
+        class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse"
+      >
+        <button
+          type="button"
+          class="w-3 h-3 rounded-full"
+          aria-current="true"
+          aria-label="Slide 1"
+          data-carousel-slide-to="0"
+        ></button>
+        <button
+          type="button"
+          class="w-3 h-3 rounded-full"
+          aria-current="false"
+          aria-label="Slide 2"
+          data-carousel-slide-to="1"
+        ></button>
+        <button
+          type="button"
+          class="w-3 h-3 rounded-full"
+          aria-current="false"
+          aria-label="Slide 3"
+          data-carousel-slide-to="2"
+        ></button>
+        <button
+          type="button"
+          class="w-3 h-3 rounded-full"
+          aria-current="false"
+          aria-label="Slide 4"
+          data-carousel-slide-to="3"
+        ></button>
+        <button
+          type="button"
+          class="w-3 h-3 rounded-full"
+          aria-current="false"
+          aria-label="Slide 5"
+          data-carousel-slide-to="4"
+        ></button>
+      </div>
+      <!-- Slider controls -->
+      <button
+        type="button"
+        class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none mx-5"
+        data-carousel-prev
+      >
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-gray-800/70 group-focus:outline-none"
+        >
+          <svg
+            class="w-4 h-4 text-gray-800 rtl:rotate-180"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 1 1 5l4 4"
+            />
+          </svg>
+          <span class="sr-only">Previous</span>
+        </span>
+      </button>
+      <button
+        type="button"
+        class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none mx-5"
+        data-carousel-next
+      >
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-gray-800/70 group-focus:outline-none"
+        >
+          <svg
+            class="w-4 h-4 text-gray-800 rtl:rotate-180"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 9 4-4-4-4"
+            />
+          </svg>
+          <span class="sr-only">Next</span>
+        </span>
+      </button>
+    </div>
+
+    <div class="flex flex-wrap justify-center md:gap-5 max-w-screen-xl mx-auto">
+      <!-- Item 1 -->
+      <a
+        href="items.html"
+        class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
+      >
+        <div
+          class="flex items-center justify-center mb-2 rounded-lg border-2"
+          style="border-color: #e2e2e2; width: 60px; height: 60px"
+        >
+          <i class="fas fa-shopping-basket text-3xl" style="color: #61b15a"></i>
+        </div>
+        <p class="text-sm font-medium text-gray-900">Grocery</p>
+      </a>
+
+      <!-- Item 2 -->
+      <a
+        href="items.html"
+        class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
+      >
+        <div
+          class="flex items-center justify-center mb-2 rounded-lg border-2"
+          style="border-color: #e2e2e2; width: 60px; height: 60px"
+        >
+          <i class="fa-solid fa-shirt text-3xl" style="color: #ff4646"></i>
+        </div>
+        <p class="text-sm font-medium text-gray-900">Fashion</p>
+      </a>
+
+      <!-- Item 3 -->
+      <a
+        href="items.html"
+        class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
+      >
+        <div
+          class="flex items-center justify-center mb-2 rounded-lg border-2"
+          style="border-color: #e2e2e2; width: 60px; height: 60px"
+        >
+          <i class="fas fa-mobile-alt text-3xl" style="color: #79a3b1"></i>
+        </div>
+        <p class="text-sm font-medium text-gray-900">Mobile</p>
+      </a>
+
+      <!-- Item 4 -->
+      <a
+        href="items.html"
+        class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
+      >
+        <div
+          class="flex items-center justify-center mb-2 rounded-lg border-2"
+          style="border-color: #e2e2e2; width: 60px; height: 60px"
+        >
+          <i class="fas fa-bolt text-3xl" style="color: #fff76a"></i>
+        </div>
+        <p class="text-sm font-medium text-gray-900">Electronics</p>
+      </a>
+
+      <!-- Item 5 -->
+      <a
+        href="items.html"
+        class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
+      >
+        <div
+          class="flex items-center justify-center mb-2 rounded-lg border-2"
+          style="border-color: #e2e2e2; width: 60px; height: 60px"
+        >
+          <i class="fas fa-home text-3xl" style="color: #1e3e62"></i>
+        </div>
+        <p class="text-sm font-medium text-gray-900">Home</p>
+      </a>
+
+      <!-- Item 6 -->
+      <a
+        href="items.html"
+        class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
+      >
+        <div
+          class="flex items-center justify-center mb-2 rounded-lg border-2"
+          style="border-color: #e2e2e2; width: 60px; height: 60px"
+        >
+          <i class="fas fa-utensils text-3xl" style="color: #61b15a"></i>
+        </div>
+        <p class="text-sm font-medium text-gray-900">Dining</p>
+      </a>
+
+      <!-- Item 7 -->
+      <a
+        href="items.html"
+        class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
+      >
+        <div
+          class="flex items-center justify-center mb-2 rounded-lg border-2"
+          style="border-color: #e2e2e2; width: 60px; height: 60px"
+        >
+          <i class="fas fa-gifts text-3xl" style="color: #ff4646"></i>
+        </div>
+        <p class="text-sm font-medium text-gray-900">Gifts</p>
+      </a>
+
+      <!-- Item 8 -->
+      <a
+        href="items.html"
+        class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
+      >
+        <div
+          class="flex items-center justify-center mb-2 rounded-lg border-2"
+          style="border-color: #e2e2e2; width: 60px; height: 60px"
+        >
+          <i class="fas fa-tools text-3xl" style="color: #79a3b1"></i>
+        </div>
+        <p class="text-sm font-medium text-gray-900">Tools</p>
+      </a>
+
+      <!-- Item 9 -->
+      <a
+        href="items.html"
+        class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
+      >
+        <div
+          class="flex items-center justify-center mb-2 rounded-lg border-2"
+          style="border-color: #e2e2e2; width: 60px; height: 60px"
+        >
+          <i class="fas fa-plane text-3xl" style="color: #1e3e62"></i>
+        </div>
+        <p class="text-sm font-medium text-gray-900">Travel</p>
+      </a>
+
+      <!-- Item 10 -->
+      <a
+        href="items.html"
+        class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
+      >
+        <div
+          class="flex items-center justify-center mb-2 rounded-lg border-2"
+          style="border-color: #e2e2e2; width: 60px; height: 60px"
+        >
+          <i class="fas fa-grip-horizontal text-3xl"></i>
+        </div>
+        <p class="text-sm font-medium text-gray-900">Others</p>
+      </a>
+    </div>
+
+    <div class="max-w-screen-xl mx-auto p-5">
+      <p class="text-4xl font-bold text-gray-900">Rekomendasi</p>
+    </div>
+
+    <div class="flex flex-wrap md:gap-3 max-w-screen-xl mx-auto mb-5">
+      <!-- Item -->
+      <div
+        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
+        style="width: 15rem; height: 22rem"
+      >
+        <div
+          class="flex justify-center img-container"
+          style="width: 100%; height: 12rem"
+        >
+          <img
+            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
+            class="w-full h-full object-cover rounded-t-lg"
+            alt="foto product"
+            style="object-fit: cover"
+          />
+        </div>
+        <div
+          class="mx-2 mb-1 mt-2"
+          style="
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          "
+        >
+          <p class="text-sm font-medium text-gray-900">
+            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
+            RESMI - Silver
+          </p>
+        </div>
+
+        <div class="mx-2 my-1">
+          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
+        </div>
+
+        <div class="flex items-center mx-1 mt-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-yellow-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">4.8</p>
+          <span class="text-gray-400">•</span>
+          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
+        </div>
+
+        <div class="flex items-center mx-1 mb-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-gray-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+            />
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">Surabaya</p>
+        </div>
+      </div>
+      <!-- Item -->
+      <div
+        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
+        style="width: 15rem; height: 22rem"
+      >
+        <div
+          class="flex justify-center img-container"
+          style="width: 100%; height: 12rem"
+        >
+          <img
+            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
+            class="w-full h-full object-cover rounded-t-lg"
+            alt="foto product"
+            style="object-fit: cover"
+          />
+        </div>
+        <div
+          class="mx-2 mb-1 mt-2"
+          style="
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          "
+        >
+          <p class="text-sm font-medium text-gray-900">
+            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
+            RESMI - Silver
+          </p>
+        </div>
+
+        <div class="mx-2 my-1">
+          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
+        </div>
+
+        <div class="flex items-center mx-1 mt-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-yellow-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">4.8</p>
+          <span class="text-gray-400">•</span>
+          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
+        </div>
+
+        <div class="flex items-center mx-1 mb-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-gray-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+            />
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">Surabaya</p>
+        </div>
+      </div>
+      <!-- Item -->
+      <div
+        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
+        style="width: 15rem; height: 22rem"
+      >
+        <div
+          class="flex justify-center img-container"
+          style="width: 100%; height: 12rem"
+        >
+          <img
+            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
+            class="w-full h-full object-cover rounded-t-lg"
+            alt="foto product"
+            style="object-fit: cover"
+          />
+        </div>
+        <div
+          class="mx-2 mb-1 mt-2"
+          style="
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          "
+        >
+          <p class="text-sm font-medium text-gray-900">
+            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
+            RESMI - Silver
+          </p>
+        </div>
+
+        <div class="mx-2 my-1">
+          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
+        </div>
+
+        <div class="flex items-center mx-1 mt-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-yellow-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">4.8</p>
+          <span class="text-gray-400">•</span>
+          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
+        </div>
+
+        <div class="flex items-center mx-1 mb-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-gray-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+            />
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">Surabaya</p>
+        </div>
+      </div>
+      <!-- Item -->
+      <div
+        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
+        style="width: 15rem; height: 22rem"
+      >
+        <div
+          class="flex justify-center img-container"
+          style="width: 100%; height: 12rem"
+        >
+          <img
+            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
+            class="w-full h-full object-cover rounded-t-lg"
+            alt="foto product"
+            style="object-fit: cover"
+          />
+        </div>
+        <div
+          class="mx-2 mb-1 mt-2"
+          style="
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          "
+        >
+          <p class="text-sm font-medium text-gray-900">
+            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
+            RESMI - Silver
+          </p>
+        </div>
+
+        <div class="mx-2 my-1">
+          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
+        </div>
+
+        <div class="flex items-center mx-1 mt-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-yellow-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">4.8</p>
+          <span class="text-gray-400">•</span>
+          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
+        </div>
+
+        <div class="flex items-center mx-1 mb-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-gray-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+            />
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">Surabaya</p>
+        </div>
+      </div>
+      <!-- Item -->
+      <div
+        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
+        style="width: 15rem; height: 22rem"
+      >
+        <div
+          class="flex justify-center img-container"
+          style="width: 100%; height: 12rem"
+        >
+          <img
+            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
+            class="w-full h-full object-cover rounded-t-lg"
+            alt="foto product"
+            style="object-fit: cover"
+          />
+        </div>
+        <div
+          class="mx-2 mb-1 mt-2"
+          style="
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          "
+        >
+          <p class="text-sm font-medium text-gray-900">
+            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
+            RESMI - Silver
+          </p>
+        </div>
+
+        <div class="mx-2 my-1">
+          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
+        </div>
+
+        <div class="flex items-center mx-1 mt-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-yellow-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">4.8</p>
+          <span class="text-gray-400">•</span>
+          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
+        </div>
+
+        <div class="flex items-center mx-1 mb-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-gray-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+            />
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">Surabaya</p>
+        </div>
+      </div>
+      <!-- Item -->
+      <div
+        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
+        style="width: 15rem; height: 22rem"
+      >
+        <div
+          class="flex justify-center img-container"
+          style="width: 100%; height: 12rem"
+        >
+          <img
+            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
+            class="w-full h-full object-cover rounded-t-lg"
+            alt="foto product"
+            style="object-fit: cover"
+          />
+        </div>
+        <div
+          class="mx-2 mb-1 mt-2"
+          style="
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          "
+        >
+          <p class="text-sm font-medium text-gray-900">
+            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
+            RESMI - Silver
+          </p>
+        </div>
+
+        <div class="mx-2 my-1">
+          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
+        </div>
+
+        <div class="flex items-center mx-1 mt-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-yellow-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">4.8</p>
+          <span class="text-gray-400">•</span>
+          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
+        </div>
+
+        <div class="flex items-center mx-1 mb-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-gray-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+            />
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">Surabaya</p>
+        </div>
+      </div>
+      <!-- Item -->
+      <div
+        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
+        style="width: 15rem; height: 22rem"
+      >
+        <div
+          class="flex justify-center img-container"
+          style="width: 100%; height: 12rem"
+        >
+          <img
+            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
+            class="w-full h-full object-cover rounded-t-lg"
+            alt="foto product"
+            style="object-fit: cover"
+          />
+        </div>
+        <div
+          class="mx-2 mb-1 mt-2"
+          style="
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          "
+        >
+          <p class="text-sm font-medium text-gray-900">
+            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
+            RESMI - Silver
+          </p>
+        </div>
+
+        <div class="mx-2 my-1">
+          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
+        </div>
+
+        <div class="flex items-center mx-1 mt-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-yellow-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">4.8</p>
+          <span class="text-gray-400">•</span>
+          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
+        </div>
+
+        <div class="flex items-center mx-1 mb-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-gray-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+            />
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">Surabaya</p>
+        </div>
+      </div>
+      <!-- Item -->
+      <div
+        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
+        style="width: 15rem; height: 22rem"
+      >
+        <div
+          class="flex justify-center img-container"
+          style="width: 100%; height: 12rem"
+        >
+          <img
+            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
+            class="w-full h-full object-cover rounded-t-lg"
+            alt="foto product"
+            style="object-fit: cover"
+          />
+        </div>
+        <div
+          class="mx-2 mb-1 mt-2"
+          style="
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          "
+        >
+          <p class="text-sm font-medium text-gray-900">
+            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
+            RESMI - Silver
+          </p>
+        </div>
+
+        <div class="mx-2 my-1">
+          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
+        </div>
+
+        <div class="flex items-center mx-1 mt-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-yellow-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">4.8</p>
+          <span class="text-gray-400">•</span>
+          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
+        </div>
+
+        <div class="flex items-center mx-1 mb-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-gray-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+            />
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">Surabaya</p>
+        </div>
+      </div>
+      <!-- Item -->
+      <div
+        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
+        style="width: 15rem; height: 22rem"
+      >
+        <div
+          class="flex justify-center img-container"
+          style="width: 100%; height: 12rem"
+        >
+          <img
+            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
+            class="w-full h-full object-cover rounded-t-lg"
+            alt="foto product"
+            style="object-fit: cover"
+          />
+        </div>
+        <div
+          class="mx-2 mb-1 mt-2"
+          style="
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          "
+        >
+          <p class="text-sm font-medium text-gray-900">
+            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
+            RESMI - Silver
+          </p>
+        </div>
+
+        <div class="mx-2 my-1">
+          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
+        </div>
+
+        <div class="flex items-center mx-1 mt-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-yellow-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">4.8</p>
+          <span class="text-gray-400">•</span>
+          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
+        </div>
+
+        <div class="flex items-center mx-1 mb-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-gray-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+            />
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">Surabaya</p>
+        </div>
+      </div>
+      <!-- Item -->
+      <div
+        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
+        style="width: 15rem; height: 22rem"
+      >
+        <div
+          class="flex justify-center img-container"
+          style="width: 100%; height: 12rem"
+        >
+          <img
+            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
+            class="w-full h-full object-cover rounded-t-lg"
+            alt="foto product"
+            style="object-fit: cover"
+          />
+        </div>
+        <div
+          class="mx-2 mb-1 mt-2"
+          style="
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          "
+        >
+          <p class="text-sm font-medium text-gray-900">
+            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
+            RESMI - Silver
+          </p>
+        </div>
+
+        <div class="mx-2 my-1">
+          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
+        </div>
+
+        <div class="flex items-center mx-1 mt-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-yellow-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">4.8</p>
+          <span class="text-gray-400">•</span>
+          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
+        </div>
+
+        <div class="flex items-center mx-1 mb-1 space-x-1">
+          <svg
+            class="w-[20px] h-[20px] text-gray-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+            />
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
+            />
+          </svg>
+          <p class="text-base font-normal text-gray-400">Surabaya</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
