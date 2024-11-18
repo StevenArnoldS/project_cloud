@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="bg-white border-gray-200 dark:bg-gray-900 shadow">
+      <div
+        class="max-w-screen-xl flex items-center justify-between mx-auto p-4"
+      >
+        <!-- Logo, displayed only on md and larger screens -->
+        <a
+          href="https://flowbite.com/"
+          class="hidden md:flex items-center space-x-3 rtl:space-x-reverse"
+        >
+          <img
+            src="https://flowbite.com/docs/images/logo.svg"
+            class="h-8"
+            alt="Flowbite Logo"
+          />
+          <span
+            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+            >Flowbite</span
+          >
+        </a>
+
+        <!-- Centered Full-width Search Bar -->
+        <div class="flex-1 flex justify-center pe-5">
+          <div class="relative w-full max-w-lg">
+            <div
+              class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+            >
+              <svg
+                class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+              <span class="sr-only">Search icon</span>
+            </div>
+            <input
+              type="text"
+              id="search-navbar"
+              class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Search..."
+            />
+          </div>
+        </div>
+
+        <!-- Right Side: Cart and User Profile -->
+        <div
+          class="flex items-center space-x-5 md:space-x-10 rtl:space-x-reverse"
+        >
+          <!-- Shopping Cart Icon -->
+          <button
+            type="button"
+            class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white focus:outline-none"
+            aria-label="View cart"
+          >
+            <i class="fas fa-shopping-cart text-xl"></i>
+          </button>
+
+          <!-- User Profile Icon and Dropdown Menu -->
+          <button
+            type="button"
+            class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            id="user-menu-button"
+            aria-expanded="false"
+            data-dropdown-toggle="user-dropdown"
+            data-dropdown-placement="bottom"
+          >
+            <span class="sr-only">Open user menu</span>
+            <img
+              class="w-8 h-8 rounded-full"
+              src="/docs/images/people/profile-picture-3.jpg"
+              alt="user photo"
+            />
+          </button>
+
+          <!-- Dropdown menu -->
+          <div
+            class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+            id="user-dropdown"
+          >
+            <div class="px-4 py-3">
+              <span class="block text-sm text-gray-900 dark:text-white"
+                >Bonnie Green</span
+              >
+              <span
+                class="block text-sm text-gray-500 truncate dark:text-gray-400"
+                >name@flowbite.com</span
+              >
+            </div>
+            <ul class="py-2" aria-labelledby="user-menu-button">
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >Dashboard</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >Settings</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >Earnings</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >Sign out</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="checkout px-28 py-8 bg-gray-50">
+        <p class="text-3xl font-bold">Pengiriman</p>
+        <div class="flex flex-row">
+          <div class="details">
+            <!-- Alamat -->
+            <div class="my-5 w-full max-w-4xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <div class="header px-2 pt-4 flex items-center">
+                <label class="ms-5 text-xl font-semibold text-gray-400 dark:text-gray-300">Alamat Pengiriman</label>
+              </div>
+
+              <!-- Pengirim -->
+              <div class="px-6 pt-4 pb-3">
+                <div class="nama-pengirim flex items-center space-x-2">
+                  <svg class="w-5 h-5 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z" clip-rule="evenodd"/>
+                  </svg>
+                  <p class="text-md font-semibold">Bonnie Green | 08123456789</p>
+                </div>
+                <div class="alamat py-2 px-2">
+                  <p>Jalan Raya Darmo Permai No. 21, Dukuh Pakis, Surabaya, Jawa Timur, 60226</p>
+                </div>
+              </div>
+
+              <!-- Ganti alamat -->
+              <div class="ganti-alamat px-7 pb-5">
+                <!-- Modal toggle -->
+                <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                  Ganti alamat
+                </button>
+
+                <!-- Main modal -->
+                <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative p-4 w-full max-w-xl max-h-full">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+
+                            <!-- Modal header -->
+                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                Daftar alamat pengiriman
+                              </h3>
+                              <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                              </button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="p-4 md:p-5">
+                              <!-- List alamat -->
+                              <div class="space-y-4 mb-5">
+                                <!-- Alamat 1 -->
+                                <div class="w-full px-4 py-3 rounded-lg ring-2 ring-gray-200 flex items-start space-x-4">
+                                  <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mt-1">
+                                  <div>
+                                    <p class="text-md font-semibold text-gray-800 dark:text-gray-100">Bonnie Green | 081234567890</p>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Jalan Raya Darmo Permai No. 21, Dukuh Pakis, Surabaya, Jawa Timur, 60226</p>
+                                  </div>
+                                </div>
+                                <!-- Alamat 2 -->
+                                <div class="w-full px-4 py-3 rounded-lg ring-2 ring-gray-200 flex items-start space-x-4">
+                                  <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mt-1">
+                                  <div>
+                                    <p class="text-md font-semibold text-gray-800 dark:text-gray-100">Karina | 081337654321</p>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Jalan Dharmawangsa No. 15, Airlangga, Gubeng, Surabaya, Jawa Timur, 60286</p>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- Tambah alamat baru -->
+                              <button type="button" data-modal-target="input-alamat-modal" data-modal-toggle="input-alamat-modal" id="input-alamat-toogle" class="flex items-center w-52 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <span class="mr-2">
+                                  <svg class="w-5 h-5 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+                                  </svg>
+                                </span>
+                                Tambah alamat baru
+                              </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Input Alamat -->
+                <div id="input-alamat-modal" tabindex="-1" aria-hidden="true" class="hidden modal modal-input fixed inset-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                  <div class="relative p-4 w-full max-w-xl max-h-full">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                      <!-- Modal header -->
+                      <div class="p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Tambah alamat baru</h3>
+                      </div>
+                      <!-- Modal body -->
+                      <div class="p-4 md:p-5 overflow-y-auto max-h-[70vh]"> <!-- Added max-h and overflow-y-auto here -->
+                        <form>
+                          <label class="text-sm font-semibold" for="Nama">Nama</label>
+                          <input type="text" class="w-full mb-4 p-2 border rounded" />
+                          <label class="text-sm font-semibold" for="Telepon">Telepon</label>
+                          <input type="text" class="w-full mb-4 p-2 border rounded" />
+                          <label class="text-sm font-semibold" for="Alamat">Alamat</label>
+                          <input type="text" class="w-full mb-4 p-2 border rounded" />
+                          <label class="text-sm font-semibold" for="Kelurahan">Kelurahan</label>
+                          <input type="text" class="w-full mb-4 p-2 border rounded" />
+                          <label class="text-sm font-semibold" for="Kecamatan">Kecamatan</label>
+                          <input type="text" class="w-full mb-4 p-2 border rounded" />
+                          <label class="text-sm font-semibold" for="Kota">Kota</label>
+                          <input type="text" class="w-full mb-4 p-2 border rounded" />
+                          <label class="text-sm font-semibold" for="Provinsi">Provinsi</label>
+                          <input type="text" class="w-full mb-4 p-2 border rounded" />
+                          <label class="text-sm font-semibold" for="KodePos">Kode pos</label>
+                          <input type="text" class="w-full mb-4 p-2 border rounded" />
+                          <div class="flex justify-between">
+                            <button type="submit" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Simpan</button>
+                            <button type="button" id="cancelInputAlamat" class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center"  data-modal-hide="input-alamat-modal">Batal</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>                
+ 
+ 
+              </div>
+            </div>
+
+
+
+            <!-- Produk -->
+            <div class="product-card my-5 w-full max-w-4xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <!-- Header Toko -->
+              <div class="header px-2 py-4 flex items-center">
+                <label class="ms-5 text-md font-bold text-gray-900 dark:text-gray-300">Jacquelle Official Store</label>
+              </div>
+              <!-- Konten Produk -->
+              <div class="content grid grid-cols-12 gap-4 items-center pl-7 pb-4">
+                <!-- Checkbox dan Gambar Produk -->
+                <div class="col-span-2 flex items-center">
+                  <img src="https://down-sg.img.susercontent.com/file/id-11134207-7r990-lzyd46wm4mou7b" alt="Jacquelle Glitter Gloss Lip Tint" class="product-image w-20 h-20 rounded border border-gray-200">
+                </div>
+                <!-- Deskripsi Produk -->
+                <div class="col-span-6">
+                  <p class="text-sm font-medium text-gray-900 dark:text-gray-300">
+                    Jacquelle Glitter Gloss Lip Tint Special Collaboration with Jazzy - Disney Inside Out Edition - Embarasment-Shy
+                  </p>
+                </div>
+                <!-- Harga Produk -->
+                <div class="col-span-3 text-end text-base font-bold text-gray-900 dark:text-white">
+                  1 x Rp 139.000
+                </div>
+              </div>
+
+              
+
+              <!-- Ekspedisi -->
+              <!-- <div class="ekspedisi">
+                <div class="header px-2 pt-4 flex items-center">
+                  <label class="ms-5 text-md font-semibold text-gray-400 dark:text-gray-300">Pilih Pengiriman</label>
+                </div>
+                <div class="pilihan-ekspedisi px-7 py-4 space-y-6">
+                  <div class="reguler space-y-2">
+                    <div class="flex items-center">
+                      <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                      <label for="default-radio-1" class="ms-2 text-semibold font-medium text-gray-900 dark:text-gray-300">Reguler (Rp 21.500)</label>
+                    </div>
+                    <p class="ms-6 text-md font-normal text-gray-900">Estimasi tiba 21 - 25 Nov</p>
+                  </div>
+                  <div class="kargo space-y-2">
+                    <div class="flex items-center">
+                      <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                      <label for="default-radio-1" class="ms-2 text-semibold font-medium text-gray-900 dark:text-gray-300">Kargo (Rp 60.000)</label>
+                    </div>
+                    <p class="ms-6 text-md font-normal text-gray-900">Estimasi tiba 21 - 25 Nov</p>
+                    <p class="ms-6 text-md font-normal text-gray-400">Rekomendasi berat di atas 5kg</p>
+                  </div>
+                  <div class="ekonomi space-y-2">
+                    <div class="flex items-center">
+                      <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                      <label for="default-radio-1" class="ms-2 text-semibold font-medium text-gray-900 dark:text-gray-300">Ekonomi (Rp 14.000)</label>
+                    </div>
+                    <p class="ms-6 text-md font-normal text-gray-900">Estimasi tiba 21 - 25 Nov</p>
+                  </div>
+                </div>
+              </div> -->
+
+              <div class="ekspedisi">
+                <div class="header px-2 pt-4 flex items-center">
+                  <label class="ms-5 text-md font-semibold text-gray-400 dark:text-gray-300">Pilih Pengiriman</label>
+                </div>
+                <div class="pilihan-ekspedisi px-7 py-4">
+                  <!-- Dropdown -->
+                  <select id="ekspedisiDropdown" class="w-full p-2 border rounded-lg bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="" selected>Pilih salah satu ekspedisi</option>
+                    <option value="reguler">Reguler (Rp 21.500)</option>
+                    <option value="kargo">Kargo (Rp 60.000)</option>
+                    <option value="ekonomi">Ekonomi (Rp 14.000)</option>
+                  </select>
+                  <!-- Detail Ekspedisi -->
+                  <div id="ekspedisiDetail" class="mt-4 px-1 hidden space-y-2">
+                    <h3 id="ekspedisiName" class="text-lg font-medium text-gray-900 dark:text-gray-300"></h3>
+                    <p id="ekspedisiEstimasi" class="text-md font-normal text-gray-900"></p>
+                    <p id="ekspedisiInfo" class="text-md font-normal text-gray-400"></p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>  
+  
+          <!-- Order Summary -->
+          <div class="mx-auto pt-5 pl-8 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
+            <div class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6">
+              <p class="text-xl font-semibold text-gray-900 dark:text-white">Ringkasan belanja</p>
+    
+              <div class="space-y-4">
+                <div class="space-y-2">
+                  <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
+                    <dt class="text-base font-normal text-gray-900 dark:text-white">Total Harga</dt>
+                    <dd class="text-base font-normal text-gray-900 dark:text-white">Rp 139.000</dd>
+                  </dl>
+                  <dl class="flex items-center justify-between gap-4 dark:border-gray-700">
+                    <dt class="text-base font-normal text-gray-900 dark:text-white">Total Ongkos Kirim</dt>
+                    <dd class="text-base font-normal text-gray-900 dark:text-white">Rp 21.500</dd>
+                  </dl>
+                  <dl class="flex items-center justify-between gap-4 dark:border-gray-700">
+                    <dt class="text-base font-normal text-gray-900 dark:text-white">Biaya Platform</dt>
+                    <dd class="text-base font-normal text-gray-900 dark:text-white">Rp 1.000</dd>
+                  </dl>
+                </div>
+
+                <!-- Metode pembayaran -->
+                <div class="metode-pembayaran">
+                  <div class="header px-1 pt-4 flex items-center">
+                    <label class="text-md font-semibold text-gray-400 dark:text-gray-300">Pilih Metode Pembayaran</label>
+                  </div>
+                  <div class="pilihan-pembayaran px-1 py-4">
+                    <!-- Dropdown -->
+                    <select id="pembayaranDropdown" class="w-full p-2 border rounded-lg bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                      <option value="" selected>Pilih salah satu metode pembayaran</option>
+                      <option value="transfer">Transfer Bank</option>
+                      <option value="cod">Bayar di Tempat (COD)</option>
+                      <option value="ewallet">E-Wallet</option>
+                    </select>
+                    <!-- Detail Pembayaran -->
+                    <div id="pembayaranDetail" class="mt-4 hidden space-y-2">
+                      <h3 id="pembayaranName" class="text-lg font-medium text-gray-900 dark:text-gray-300"></h3>
+                      <p id="pembayaranInfo" class="text-md font-normal text-gray-900"></p>
+                    </div>
+                  </div>
+                </div>
+                
+                <a href="checkout.html" class="flex w-full items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Bayar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+  </body>
+  <script>
+    // Modal alamat
+    document.addEventListener('DOMContentLoaded', function () {
+      const modalToggleButtons = document.querySelectorAll('[data-modal-toggle]');
+      modalToggleButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const targetModalId = this.getAttribute('data-modal-toggle');
+          const modal = document.getElementById(targetModalId);
+          modal.classList.toggle('hidden');
+        });
+      });
+
+      // Close modal on clicking the close button
+      const closeModalButtons = document.querySelectorAll('[data-modal-hide]');
+      closeModalButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const modal = this.closest('.modal');
+          modal.classList.add('hidden');
+        });
+      });
+    });
+
+
+    // Ekspedisi
+    const ekspedisiDropdown = document.getElementById("ekspedisiDropdown");
+    const ekspedisiDetail = document.getElementById("ekspedisiDetail");
+    const ekspedisiName = document.getElementById("ekspedisiName");
+    const ekspedisiEstimasi = document.getElementById("ekspedisiEstimasi");
+    const ekspedisiInfo = document.getElementById("ekspedisiInfo");
+
+    const ekspedisiData = {
+      reguler: {
+        name: "Reguler (Rp 21.500)",
+        estimasi: "Estimasi tiba 21 - 25 Nov",
+        info: ""
+      },
+      kargo: {
+        name: "Kargo (Rp 60.000)",
+        estimasi: "Estimasi tiba 21 - 25 Nov",
+        info: "Rekomendasi berat di atas 5kg"
+      },
+      ekonomi: {
+        name: "Ekonomi (Rp 14.000)",
+        estimasi: "Estimasi tiba 21 - 25 Nov",
+        info: ""
+      }
+    };
+
+    ekspedisiDropdown.addEventListener("change", () => {
+      const selectedValue = ekspedisiDropdown.value;
+      if (selectedValue && ekspedisiData[selectedValue]) {
+        ekspedisiDetail.classList.remove("hidden");
+        ekspedisiName.textContent = ekspedisiData[selectedValue].name;
+        ekspedisiEstimasi.textContent = ekspedisiData[selectedValue].estimasi;
+        ekspedisiInfo.textContent = ekspedisiData[selectedValue].info;
+      } else {
+        ekspedisiDetail.classList.add("hidden");
+      }
+    });
+
+    // Metode pembayaran
+    const pembayaranDropdown = document.getElementById("pembayaranDropdown");
+    const pembayaranDetail = document.getElementById("pembayaranDetail");
+    const pembayaranName = document.getElementById("pembayaranName");
+    const pembayaranInfo = document.getElementById("pembayaranInfo");
+
+    const pembayaranData = {
+      transfer: {
+        name: "Transfer Bank",
+        info: "Pembayaran melalui rekening bank seperti BCA, Mandiri, atau BNI. Pastikan menyertakan nomor virtual account saat transfer."
+      },
+      cod: {
+        name: "Bayar di Tempat (COD)",
+        info: "Bayar langsung kepada kurir saat barang diterima. Harap siapkan uang tunai yang pas."
+      },
+      ewallet: {
+        name: "E-Wallet",
+        info: "Pembayaran melalui dompet digital seperti OVO, GoPay, atau Dana. Pastikan saldo mencukupi."
+      }
+    };
+
+    pembayaranDropdown.addEventListener("change", () => {
+      const selectedValue = pembayaranDropdown.value;
+      if (selectedValue && pembayaranData[selectedValue]) {
+        pembayaranDetail.classList.remove("hidden");
+        pembayaranName.textContent = pembayaranData[selectedValue].name;
+        pembayaranInfo.textContent = pembayaranData[selectedValue].info;
+      } else {
+        pembayaranDetail.classList.add("hidden");
+      }
+    });
+  </script>
+</html>

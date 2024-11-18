@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="bg-gray-900 shadow">
+      <div
+        class="max-w-screen-xl flex items-center justify-between mx-auto p-5"
+      >
+        <!-- Logo, displayed only on md and larger screens -->
+        <a
+          href="https://flowbite.com/"
+          class="hidden md:flex items-center space-x-3 rtl:space-x-reverse"
+        >
+          <img
+            src="https://flowbite.com/docs/images/logo.svg"
+            class="h-8"
+            alt="Flowbite Logo"
+          />
+          <span
+            class="self-center text-2xl font-semibold whitespace-nowrap text-white"
+            >E-commerce</span
+          >
+        </a>
+
+        <!-- Centered Full-width Search Bar -->
+        <div class="flex-1 flex justify-center pe-5">
+          <div class="relative w-full max-w-lg">
+            <div
+              class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+            >
+              <svg
+                class="w-4 h-4 text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+              <span class="sr-only">Search icon</span>
+            </div>
+            <input
+              type="text"
+              id="search-navbar"
+              class="block w-full p-2 ps-10 text-sm  border rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
+              placeholder="Search..."
+            />
+          </div>
+        </div>
+
+        <!-- Right Side: Cart and User Profile -->
+        <div
+          class="flex items-center space-x-5 md:space-x-10 rtl:space-x-reverse"
+        >
+          <!-- Favorite Icon -->
+          <button
+            type="button"
+            class="text-gray-400 hover:text-white focus:outline-none"
+            aria-label="View favorite"
+          >
+            <i class="fa-solid fa-heart text-xl"></i>
+          </button>
+          <!-- Shopping Cart Icon -->
+          <button
+            type="button"
+            class="text-gray-400 hover:text-white focus:outline-none"
+            aria-label="View cart"
+          >
+            <i class="fas fa-shopping-cart text-xl"></i>
+          </button>
+
+          <!-- User Profile Icon and Dropdown Menu -->
+          <button
+            type="button"
+            class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-600"
+            id="user-menu-button"
+            aria-expanded="false"
+            data-dropdown-toggle="user-dropdown"
+            data-dropdown-placement="bottom"
+          >
+            <span class="sr-only">Open user menu</span>
+            <img
+              class="w-8 h-8 rounded-full"
+              src="https://static.vecteezy.com/system/resources/thumbnails/019/900/306/small_2x/happy-young-cute-illustration-face-profile-png.png"
+              alt="user photo"
+            />
+          </button>
+
+          <!-- Dropdown menu -->
+          <div
+            class="z-50 hidden my-4 text-base list-none divide-y rounded-lg shadow bg-gray-700 divide-gray-600"
+            id="user-dropdown"
+          >
+            <div class="px-4 py-3">
+              <span class="block text-sm text-white"
+                >Bonnie Green</span
+              >
+              <span
+                class="block text-sm truncate text-gray-400"
+                >name@flowbite.com</span
+              >
+            </div>
+            <ul class="py-2" aria-labelledby="user-menu-button">
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
+                  >Dashboard</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
+                  >Settings</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
+                  >Earnings</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
+                  >Sign out</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="cart px-28 py-8 bg-gray-50">
+      <p class="text-3xl font-bold">Keranjang</p>
+      <div class="flex flex-row">
+        <div class="products">
+          <!-- Card Produk Pertama -->
+          <div class="product-card my-5 w-full max-w-4xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <!-- Header Toko -->
+            <div class="header px-5 py-4 flex items-center">
+              <input type="checkbox" class="checkbox w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-transparent dark:focus:ring-transparent dark:ring-transparent dark:bg-gray-700 dark:border-gray-600">
+              <label class="ms-5 text-md font-bold text-gray-900 dark:text-gray-300">Grace and Glow Official Shop</label>
+            </div>
+            <!-- Konten Produk 1-1 -->
+            <div class="content grid grid-cols-12 gap-4 items-center px-5 py-4">
+              <!-- Checkbox dan Gambar Produk -->
+              <div class="col-span-2 flex items-center">
+                <input type="checkbox" class="checkbox w-6 h-6 mr-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-transparent dark:focus:ring-transparent dark:ring-transparent dark:bg-gray-700 dark:border-gray-600">
+                <img src="https://images.tokopedia.net/img/cache/100-square/VqbcmM/2023/10/18/020ace34-8a3a-454e-9ae8-292ae5e2d933.jpg" alt="Grace and Glow body wash - Peony blush" class="product-image w-20 h-20 rounded border border-gray-200">
+              </div>
+              <!-- Deskripsi Produk -->
+              <div class="col-span-6">
+                <p class="text-sm font-medium text-gray-900 dark:text-gray-300">
+                  Grace and Glow Peony Blush Soft & Glow solution Body Wash 400 ml
+                </p>
+              </div>
+              <!-- Counter Quantity -->
+              <div class="col-span-2 flex items-center justify-center space-x-2">
+                <!-- Decrement Button (Flowbite) -->
+                <button type="button" id="decrement-button" data-input-counter-decrement="counter-input" class="inline-flex items-center px-2 py-1 text-sm font-medium text-gray-900 bg-gray-200 rounded-l-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-700">
+                  <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                  </svg>
+                </button>
+                <input type="text" id="counter-input" data-input-counter class="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white" placeholder="" value="1" required />
+                <!-- Increment Button (Flowbite) -->
+                <button type="button" id="increment-button" data-input-counter-increment="counter-input" class="inline-flex items-center px-2 py-1 text-sm font-medium text-gray-900 bg-gray-200 rounded-r-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-700">
+                  <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                  </svg>
+                </button>
+              </div>
+              <!-- Harga Produk -->
+              <div class="col-span-2 text-end text-base font-bold text-gray-900 dark:text-white">
+                Rp 52.000
+              </div>
+            </div>
+
+            <!-- Konten Produk 1-2 -->
+            <div class="content grid grid-cols-12 gap-4 items-center px-5 py-4">
+              <!-- Checkbox dan Gambar Produk -->
+              <div class="col-span-2 flex items-center">
+                <input type="checkbox" class="checkbox w-6 h-6 mr-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-transparent dark:focus:ring-transparent dark:ring-transparent dark:bg-gray-700 dark:border-gray-600">
+                <img src="https://images.tokopedia.net/img/cache/100-square/VqbcmM/2023/3/7/12f8901e-def7-4d7d-b1fd-6fe95277d052.jpg.webp?ect=4g" alt="Grace and Glow body wash - Peony blush" class="product-image w-20 h-20 rounded border border-gray-200">
+              </div>
+              <!-- Deskripsi Produk -->
+              <div class="col-span-6">
+                <p class="text-sm font-medium text-gray-900 dark:text-gray-300">
+                  Grace and Glow Silky and Protect Care Hair Mist - Hair Perfume
+                </p>
+              </div>
+              <!-- Counter Quantity -->
+              <div class="col-span-2 flex items-center justify-center space-x-2">
+                <!-- Decrement Button (Flowbite) -->
+                <button type="button" id="decrement-button-1" data-input-counter-decrement="counter-input-1" class="inline-flex items-center px-2 py-1 text-sm font-medium text-gray-900 bg-gray-200 rounded-l-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-700">
+                  <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                  </svg>
+                </button>
+                <input type="text" id="counter-input-1" data-input-counter class="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white" placeholder="" value="2" required />
+                <!-- Increment Button (Flowbite) -->
+                <button type="button" id="increment-button-1" data-input-counter-increment="counter-input-1" class="inline-flex items-center px-2 py-1 text-sm font-medium text-gray-900 bg-gray-200 rounded-r-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-700">
+                  <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                  </svg>
+                </button>
+              </div>
+              <!-- Harga Produk -->
+              <div class="col-span-2 text-end text-base font-bold text-gray-900 dark:text-white">
+                Rp 43.000
+              </div>
+            </div>
+          </div>
+        
+          <!-- Card Produk Kedua -->
+          <div class="product-card my-5 w-full max-w-4xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <!-- Header Toko -->
+            <div class="header px-5 py-4 flex items-center">
+              <input type="checkbox" class="checkbox w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-transparent dark:focus:ring-transparent dark:ring-transparent dark:bg-gray-700 dark:border-gray-600">
+              <label class="ms-5 text-md font-bold text-gray-900 dark:text-gray-300">Jacquelle Official Store</label>
+            </div>
+            <!-- Konten Produk -->
+            <div class="content grid grid-cols-12 gap-4 items-center px-5 py-4">
+              <!-- Checkbox dan Gambar Produk -->
+              <div class="col-span-2 flex items-center">
+                <input type="checkbox" class="checkbox w-6 h-6 mr-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-transparent dark:focus:ring-transparent dark:ring-transparent dark:bg-gray-700 dark:border-gray-600">
+                <img src="https://down-sg.img.susercontent.com/file/id-11134207-7r990-lzyd46wm4mou7b" alt="Jacquelle Glitter Gloss Lip Tint" class="product-image w-20 h-20 rounded border border-gray-200">
+              </div>
+              <!-- Deskripsi Produk -->
+              <div class="col-span-6">
+                <p class="text-sm font-medium text-gray-900 dark:text-gray-300">
+                  Jacquelle Glitter Gloss Lip Tint Special Collaboration with Jazzy - Disney Inside Out Edition - Embarasment-Shy
+                </p>
+              </div>
+              <!-- Counter Quantity -->
+              <div class="col-span-2 flex items-center justify-center space-x-2">
+                <!-- Decrement Button (Flowbite) -->
+                <button type="button" id="decrement-button-2" data-input-counter-decrement="counter-input-2" class="inline-flex items-center px-2 py-1 text-sm font-medium text-gray-900 bg-gray-200 rounded-l-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-700">
+                  <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                  </svg>
+                </button>
+                <input type="text" id="counter-input-2" data-input-counter class="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white" placeholder="" value="1" required />
+                <!-- Increment Button (Flowbite) -->
+                <button type="button" id="increment-button-2" data-input-counter-increment="counter-input-2" class="inline-flex items-center px-2 py-1 text-sm font-medium text-gray-900 bg-gray-200 rounded-r-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-700">
+                  <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                  </svg>
+                </button>
+              </div>
+              <!-- Harga Produk -->
+              <div class="col-span-2 text-end text-base font-bold text-gray-900 dark:text-white">
+                Rp 139.000
+              </div>
+            </div>
+          </div>
+        </div>  
+
+        <!-- Order Summary -->
+        <div class="mx-auto pt-5 pl-8 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
+          <div class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6">
+            <p class="text-xl font-semibold text-gray-900 dark:text-white">Ringkasan belanja</p>
+  
+            <div class="space-y-4">
+              <div class="space-y-2">
+                <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
+                  <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
+                  <dd class="text-base font-bold text-gray-900 dark:text-white">Rp 139.000</dd>
+                </dl>
+              </div>
+              <a href="checkout.html" class="flex w-full items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Beli</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
