@@ -23,7 +23,7 @@
       >
         <!-- Logo, displayed only on md and larger screens -->
         <a
-          href="https://flowbite.com/"
+          href="index.html"
           class="hidden md:flex items-center space-x-3 rtl:space-x-reverse"
         >
           <img
@@ -299,7 +299,7 @@
     <div class="flex flex-wrap justify-center md:gap-5 max-w-screen-xl mx-auto">
       <!-- Item 1 -->
       <a
-        href="items.html"
+        href="items.html?category=Grocery"
         class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
       >
         <div
@@ -313,7 +313,7 @@
 
       <!-- Item 2 -->
       <a
-        href="items.html"
+        href="items.html?category=Fashion"
         class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
       >
         <div
@@ -327,7 +327,7 @@
 
       <!-- Item 3 -->
       <a
-        href="items.html"
+        href="items.html?category=Mobile"
         class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
       >
         <div
@@ -341,7 +341,7 @@
 
       <!-- Item 4 -->
       <a
-        href="items.html"
+        href="items.html?category=Electronics"
         class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
       >
         <div
@@ -355,7 +355,7 @@
 
       <!-- Item 5 -->
       <a
-        href="items.html"
+        href="items.html?category=Home"
         class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
       >
         <div
@@ -369,7 +369,7 @@
 
       <!-- Item 6 -->
       <a
-        href="items.html"
+        href="items.html?category=Dining"
         class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
       >
         <div
@@ -383,7 +383,7 @@
 
       <!-- Item 7 -->
       <a
-        href="items.html"
+        href="items.html?category=Gifts"
         class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
       >
         <div
@@ -397,7 +397,7 @@
 
       <!-- Item 8 -->
       <a
-        href="items.html"
+        href="items.html?category=Tools"
         class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
       >
         <div
@@ -411,7 +411,7 @@
 
       <!-- Item 9 -->
       <a
-        href="items.html"
+        href="items.html?category=Travel"
         class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
       >
         <div
@@ -425,7 +425,7 @@
 
       <!-- Item 10 -->
       <a
-        href="items.html"
+        href="items.html?category=Others"
         class="flex flex-col items-center justify-center w-[90px] p-2 hover:-translate-y-[2px] transition-transform"
       >
         <div
@@ -442,837 +442,145 @@
       <p class="text-4xl font-bold text-gray-900">Rekomendasi</p>
     </div>
 
-    <div class="flex flex-wrap md:gap-3 max-w-screen-xl mx-auto mb-5">
-      <!-- Item -->
-      <div
-        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
-        style="width: 15rem; height: 22rem"
-      >
+    <div
+      class="products-container flex flex-wrap md:gap-3 max-w-screen-xl mx-auto mb-5"
+    ></div>
+
+    <script>
+      const apiUrl =
+        "https://5wbr7sngsd.execute-api.us-east-1.amazonaws.com/default/rdslambda"; // URL Lambda Anda
+
+      async function fetchProducts() {
+        try {
+          const response = await fetch(apiUrl);
+          if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+          }
+
+          const products = await response.json();
+          renderProducts(products);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      }
+
+      function renderProducts(products) {
+        const container = document.querySelector(".products-container");
+        container.innerHTML = "";
+
+        products.forEach((product) => {
+          const productElement = `
+            <a href="detail.html" class="block">
         <div
-          class="flex justify-center img-container"
-          style="width: 100%; height: 12rem"
+          class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
+          style="width: 15rem; height: 22rem"
         >
-          <img
-            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
-            class="w-full h-full object-cover rounded-t-lg"
-            alt="foto product"
-            style="object-fit: cover"
-          />
-        </div>
-        <div
-          class="mx-2 mb-1 mt-2"
-          style="
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          "
-        >
-          <p class="text-sm font-medium text-gray-900">
-            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
-            RESMI - Silver
-          </p>
-        </div>
-
-        <div class="mx-2 my-1">
-          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
-        </div>
-
-        <div class="flex items-center mx-1 mt-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-yellow-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="currentColor"
-            viewBox="0 0 24 24"
+          <div
+            class="flex justify-center img-container"
+            style="width: 100%; height: 12rem"
           >
-            <path
-              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
+            <img
+              src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
+              class="w-full h-full object-cover rounded-t-lg"
+              alt="foto product"
+              style="object-fit: cover"
             />
-          </svg>
-          <p class="text-base font-normal text-gray-400">4.8</p>
-          <span class="text-gray-400">•</span>
-          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
-        </div>
-
-        <div class="flex items-center mx-1 mb-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-gray-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
+          </div>
+          <div
+            class="mx-2 mb-1 mt-2"
+            style="
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              min-height: 2.4em;
+            "
           >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-            />
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">Surabaya</p>
+            <p class="text-sm font-medium text-gray-900 uppercase">
+  ${product.name}
+</p>
+          </div>
+          <div class="mx-2 my-1">
+            <p class="text-lg font-bold text-gray-900">Rp${product.price.toLocaleString(
+              "id-ID"
+            )}</p>
+          </div>
+          <div class="flex items-center mx-1 mt-1 space-x-1">
+            <svg
+              class="w-[20px] h-[20px] text-yellow-300"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
+              />
+            </svg>
+            <p class="text-base font-normal text-gray-400">${product.rating}</p>
+            <span class="text-gray-400">•</span>
+            <p class="text-base font-normal text-gray-400">${
+              product.sold
+            } terjual</p>
+          </div>
+          <div class="flex items-center mx-1 mb-1 space-x-1">
+            <svg
+              class="w-[20px] h-[20px] text-gray-300"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+              />
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
+              />
+            </svg>
+            <p class="text-base font-normal text-gray-400">${
+              product.location
+            }</p>
+          </div>
         </div>
-      </div>
-      <!-- Item -->
-      <div
-        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
-        style="width: 15rem; height: 22rem"
-      >
-        <div
-          class="flex justify-center img-container"
-          style="width: 100%; height: 12rem"
-        >
-          <img
-            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
-            class="w-full h-full object-cover rounded-t-lg"
-            alt="foto product"
-            style="object-fit: cover"
-          />
-        </div>
-        <div
-          class="mx-2 mb-1 mt-2"
-          style="
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          "
-        >
-          <p class="text-sm font-medium text-gray-900">
-            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
-            RESMI - Silver
-          </p>
-        </div>
+      </a>
+          `;
+          container.insertAdjacentHTML("beforeend", productElement);
+        });
+      }
 
-        <div class="mx-2 my-1">
-          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
-        </div>
+      // Panggil fetchProducts saat halaman dimuat
+      fetchProducts();
 
-        <div class="flex items-center mx-1 mt-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-yellow-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">4.8</p>
-          <span class="text-gray-400">•</span>
-          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
-        </div>
+      document
+        .getElementById("search-navbar")
+        .addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            const searchInput = document
+              .getElementById("search-navbar")
+              .value.trim();
 
-        <div class="flex items-center mx-1 mb-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-gray-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-            />
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">Surabaya</p>
-        </div>
-      </div>
-      <!-- Item -->
-      <div
-        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
-        style="width: 15rem; height: 22rem"
-      >
-        <div
-          class="flex justify-center img-container"
-          style="width: 100%; height: 12rem"
-        >
-          <img
-            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
-            class="w-full h-full object-cover rounded-t-lg"
-            alt="foto product"
-            style="object-fit: cover"
-          />
-        </div>
-        <div
-          class="mx-2 mb-1 mt-2"
-          style="
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          "
-        >
-          <p class="text-sm font-medium text-gray-900">
-            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
-            RESMI - Silver
-          </p>
-        </div>
-
-        <div class="mx-2 my-1">
-          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
-        </div>
-
-        <div class="flex items-center mx-1 mt-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-yellow-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">4.8</p>
-          <span class="text-gray-400">•</span>
-          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
-        </div>
-
-        <div class="flex items-center mx-1 mb-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-gray-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-            />
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">Surabaya</p>
-        </div>
-      </div>
-      <!-- Item -->
-      <div
-        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
-        style="width: 15rem; height: 22rem"
-      >
-        <div
-          class="flex justify-center img-container"
-          style="width: 100%; height: 12rem"
-        >
-          <img
-            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
-            class="w-full h-full object-cover rounded-t-lg"
-            alt="foto product"
-            style="object-fit: cover"
-          />
-        </div>
-        <div
-          class="mx-2 mb-1 mt-2"
-          style="
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          "
-        >
-          <p class="text-sm font-medium text-gray-900">
-            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
-            RESMI - Silver
-          </p>
-        </div>
-
-        <div class="mx-2 my-1">
-          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
-        </div>
-
-        <div class="flex items-center mx-1 mt-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-yellow-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">4.8</p>
-          <span class="text-gray-400">•</span>
-          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
-        </div>
-
-        <div class="flex items-center mx-1 mb-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-gray-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-            />
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">Surabaya</p>
-        </div>
-      </div>
-      <!-- Item -->
-      <div
-        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
-        style="width: 15rem; height: 22rem"
-      >
-        <div
-          class="flex justify-center img-container"
-          style="width: 100%; height: 12rem"
-        >
-          <img
-            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
-            class="w-full h-full object-cover rounded-t-lg"
-            alt="foto product"
-            style="object-fit: cover"
-          />
-        </div>
-        <div
-          class="mx-2 mb-1 mt-2"
-          style="
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          "
-        >
-          <p class="text-sm font-medium text-gray-900">
-            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
-            RESMI - Silver
-          </p>
-        </div>
-
-        <div class="mx-2 my-1">
-          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
-        </div>
-
-        <div class="flex items-center mx-1 mt-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-yellow-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">4.8</p>
-          <span class="text-gray-400">•</span>
-          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
-        </div>
-
-        <div class="flex items-center mx-1 mb-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-gray-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-            />
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">Surabaya</p>
-        </div>
-      </div>
-      <!-- Item -->
-      <div
-        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
-        style="width: 15rem; height: 22rem"
-      >
-        <div
-          class="flex justify-center img-container"
-          style="width: 100%; height: 12rem"
-        >
-          <img
-            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
-            class="w-full h-full object-cover rounded-t-lg"
-            alt="foto product"
-            style="object-fit: cover"
-          />
-        </div>
-        <div
-          class="mx-2 mb-1 mt-2"
-          style="
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          "
-        >
-          <p class="text-sm font-medium text-gray-900">
-            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
-            RESMI - Silver
-          </p>
-        </div>
-
-        <div class="mx-2 my-1">
-          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
-        </div>
-
-        <div class="flex items-center mx-1 mt-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-yellow-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">4.8</p>
-          <span class="text-gray-400">•</span>
-          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
-        </div>
-
-        <div class="flex items-center mx-1 mb-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-gray-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-            />
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">Surabaya</p>
-        </div>
-      </div>
-      <!-- Item -->
-      <div
-        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
-        style="width: 15rem; height: 22rem"
-      >
-        <div
-          class="flex justify-center img-container"
-          style="width: 100%; height: 12rem"
-        >
-          <img
-            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
-            class="w-full h-full object-cover rounded-t-lg"
-            alt="foto product"
-            style="object-fit: cover"
-          />
-        </div>
-        <div
-          class="mx-2 mb-1 mt-2"
-          style="
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          "
-        >
-          <p class="text-sm font-medium text-gray-900">
-            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
-            RESMI - Silver
-          </p>
-        </div>
-
-        <div class="mx-2 my-1">
-          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
-        </div>
-
-        <div class="flex items-center mx-1 mt-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-yellow-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">4.8</p>
-          <span class="text-gray-400">•</span>
-          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
-        </div>
-
-        <div class="flex items-center mx-1 mb-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-gray-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-            />
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">Surabaya</p>
-        </div>
-      </div>
-      <!-- Item -->
-      <div
-        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
-        style="width: 15rem; height: 22rem"
-      >
-        <div
-          class="flex justify-center img-container"
-          style="width: 100%; height: 12rem"
-        >
-          <img
-            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
-            class="w-full h-full object-cover rounded-t-lg"
-            alt="foto product"
-            style="object-fit: cover"
-          />
-        </div>
-        <div
-          class="mx-2 mb-1 mt-2"
-          style="
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          "
-        >
-          <p class="text-sm font-medium text-gray-900">
-            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
-            RESMI - Silver
-          </p>
-        </div>
-
-        <div class="mx-2 my-1">
-          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
-        </div>
-
-        <div class="flex items-center mx-1 mt-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-yellow-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">4.8</p>
-          <span class="text-gray-400">•</span>
-          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
-        </div>
-
-        <div class="flex items-center mx-1 mb-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-gray-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-            />
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">Surabaya</p>
-        </div>
-      </div>
-      <!-- Item -->
-      <div
-        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
-        style="width: 15rem; height: 22rem"
-      >
-        <div
-          class="flex justify-center img-container"
-          style="width: 100%; height: 12rem"
-        >
-          <img
-            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
-            class="w-full h-full object-cover rounded-t-lg"
-            alt="foto product"
-            style="object-fit: cover"
-          />
-        </div>
-        <div
-          class="mx-2 mb-1 mt-2"
-          style="
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          "
-        >
-          <p class="text-sm font-medium text-gray-900">
-            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
-            RESMI - Silver
-          </p>
-        </div>
-
-        <div class="mx-2 my-1">
-          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
-        </div>
-
-        <div class="flex items-center mx-1 mt-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-yellow-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">4.8</p>
-          <span class="text-gray-400">•</span>
-          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
-        </div>
-
-        <div class="flex items-center mx-1 mb-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-gray-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-            />
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">Surabaya</p>
-        </div>
-      </div>
-      <!-- Item -->
-      <div
-        class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
-        style="width: 15rem; height: 22rem"
-      >
-        <div
-          class="flex justify-center img-container"
-          style="width: 100%; height: 12rem"
-        >
-          <img
-            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
-            class="w-full h-full object-cover rounded-t-lg"
-            alt="foto product"
-            style="object-fit: cover"
-          />
-        </div>
-        <div
-          class="mx-2 mb-1 mt-2"
-          style="
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          "
-        >
-          <p class="text-sm font-medium text-gray-900">
-            HP SAMSUNG GALAXY A24 8/128 GB - SAMSUNG A 24 RAM 8GB ROM 128GB
-            RESMI - Silver
-          </p>
-        </div>
-
-        <div class="mx-2 my-1">
-          <p class="text-lg font-bold text-gray-900">Rp20.000.000</p>
-        </div>
-
-        <div class="flex items-center mx-1 mt-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-yellow-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">4.8</p>
-          <span class="text-gray-400">•</span>
-          <p class="text-base font-normal text-gray-400">4rb+ terjual</p>
-        </div>
-
-        <div class="flex items-center mx-1 mb-1 space-x-1">
-          <svg
-            class="w-[20px] h-[20px] text-gray-300"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-            />
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
-            />
-          </svg>
-          <p class="text-base font-normal text-gray-400">Surabaya</p>
-        </div>
-      </div>
-    </div>
+            // Jika input pencarian tidak kosong, kita akan mengirimkan query ke items.html
+            if (searchInput) {
+              window.location.href = `items.html?search=${encodeURIComponent(
+                searchInput
+              )}`;
+            }
+          }
+        });
+    </script>
   </body>
 </html>
