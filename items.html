@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Items</title>
+    <title></title>
     <link
       href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
       rel="stylesheet"
@@ -324,8 +324,12 @@
 
         if (searchQuery) {
           url += `?search=${encodeURIComponent(searchQuery)}`;
+          document.title = `E-commerce | ${searchQuery}`;
         } else if (category) {
           url += `?category=${encodeURIComponent(category)}`;
+          document.title = `E-commerce | ${category}`;
+        } else {
+          document.title = "E-commerce";
         }
 
         const condition = document.querySelector(
@@ -360,13 +364,14 @@
         }
 
         products.forEach((product) => {
+          const productImageUrl = `https://ccecommerce.s3.us-east-1.amazonaws.com/img/${encodeURIComponent(
+            product.name
+          )}.jpg`;
           const productElement = `
-    <a href="detail.html" class="block">
+    <a href="detail.html?name=${product.name}" class="block">
       <div class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all" style="width: 15rem; height: 22rem">
         <div class="flex justify-center img-container" style="width: 100%; height: 12rem">
-          <img src="${
-            product.image
-          }" class="w-full h-full object-cover rounded-t-lg" alt="${
+          <img src="${productImageUrl}" class="w-full h-full object-cover rounded-t-lg" alt="${
             product.name
           }" style="object-fit: cover"/>
         </div>
@@ -483,6 +488,23 @@
 
       // Initial fetch
       fetchProducts();
+
+      document
+        .getElementById("search-navbar")
+        .addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            const searchInput = document
+              .getElementById("search-navbar")
+              .value.trim();
+
+            // Jika input pencarian tidak kosong, kita akan mengirimkan query ke items.html
+            if (searchInput) {
+              window.location.href = `items.html?search=${encodeURIComponent(
+                searchInput
+              )}`;
+            }
+          }
+        });
     </script>
   </body>
 </html>

@@ -467,10 +467,9 @@
       function renderProducts(products) {
         const container = document.querySelector(".products-container");
         container.innerHTML = "";
-
         products.forEach((product) => {
           const productElement = `
-            <a href="detail.html" class="block">
+            <a href="detail.html?name=${product.name}" class="block">
         <div
           class="flex flex-col mb-2 rounded-lg border-2 hover:border-red-500 transition-all"
           style="width: 15rem; height: 22rem"
@@ -480,7 +479,10 @@
             style="width: 100%; height: 12rem"
           >
             <img
-              src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
+            id="foto-product"
+              src="https://ccecommerce.s3.us-east-1.amazonaws.com/img/${encodeURIComponent(
+                product.name
+              )}.jpg"
               class="w-full h-full object-cover rounded-t-lg"
               alt="foto product"
               style="object-fit: cover"

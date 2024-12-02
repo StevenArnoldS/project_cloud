@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Detail Item</title>
+    <title></title>
     <link
       href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
       rel="stylesheet"
@@ -15,6 +15,21 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     />
+    <style>
+      #product-description {
+        height: 9rem; /* Mengatur tinggi yang terlihat (setengah dari deskripsi penuh) */
+        overflow: hidden; /* Sembunyikan bagian yang lebih dari tinggi ini */
+        transition: height 0.3s ease-in-out; /* Transisi perubahan tinggi */
+      }
+
+      #product-description.expanded {
+        height: auto; /* Biarkan konten berkembang secara otomatis */
+      }
+
+      .show-more {
+        transition: opacity 0.3s ease-in-out; /* Transisi untuk tombol show more */
+      }
+    </style>
   </head>
   <body>
     <nav class="bg-gray-900 shadow">
@@ -161,123 +176,52 @@
         <!-- Gambar Utama -->
         <img
           id="main-image"
-          src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
-          alt="Product Image"
+          src=""
           class="w-[30rem] h-[30rem] object-cover rounded-lg"
         />
         <!-- Thumbnail Gambar -->
         <div id="thumbnail-container" class="flex gap-2 mt-4">
           <img
-            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/111/MTA-159762098/no-brand_no-brand_full01.jpg"
-            alt="Thumbnail"
-            class="w-20 h-20 object-cover rounded-lg cursor-pointer"
+            id="thumbnail1"
+            src=""
+            class="w-20 h-20 object-cover rounded-lg cursor-pointer border-2 border-transparent"
+            tabindex="0"
           />
           <img
-            src="https://images.tokopedia.net/img/cache/700/VqbcmM/2022/10/6/c0d0fdd7-b9dd-4f9c-bdb1-8ba69b4f4fb5.jpg"
-            alt="Thumbnail"
-            class="w-20 h-20 object-cover rounded-lg cursor-pointer"
+            id="thumbnail2"
+            src=""
+            class="w-20 h-20 object-cover rounded-lg cursor-pointer border-2 border-transparent"
+            tabindex="0"
           />
           <img
-            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//catalog-image/91/MTA-142217910/no-brand_no-brand_full01.jpg"
-            alt="Thumbnail"
-            class="w-20 h-20 object-cover rounded-lg cursor-pointer"
+            id="thumbnail3"
+            src=""
+            class="w-20 h-20 object-cover rounded-lg cursor-pointer border-2 border-transparent"
+            tabindex="0"
           />
           <img
-            src="https://images.tokopedia.net/img/cache/700/VqbcmM/2024/2/5/d6bb912c-c5cb-417f-9464-51916fa5aeef.jpg"
-            alt="Thumbnail"
-            class="w-20 h-20 object-cover rounded-lg cursor-pointer"
+            id="thumbnail4"
+            src=""
+            class="w-20 h-20 object-cover rounded-lg cursor-pointer border-2 border-transparent"
+            tabindex="0"
           />
           <img
-            src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/103/MTA-169737005/brd-44261_mainan-anak-blind-box-sanrio-dekorasi-karakter-kejutan-lucu-imut_full01-8bda2d7d.jpg"
-            alt="Thumbnail"
-            class="w-20 h-20 object-cover rounded-lg cursor-pointer"
+            id="thumbnail5"
+            src=""
+            class="w-20 h-20 object-cover rounded-lg cursor-pointer border-2 border-transparent"
+            tabindex="0"
           />
         </div>
       </div>
       <!-- Product Details -->
       <div class="flex-1">
-        <div class="flex items-center gap-2">
-          <h1 class="text-2xl font-semibold">
-            PROMO TAS SLEMPANG UNTUK LAPTOP ALL BRAND
-          </h1>
-        </div>
-        <div class="flex space-x-5 items-center">
-          <p class="mt-2 text-3xl font-bold text-red-600">Rp175.000</p>
-          <div class="flex items-center mt-2 text-yellow-500 text-lg">
-            <span class="flex items-center">
-              5.0
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
-                />
-              </svg>
-            </span>
-            <span class="ml-2 text-gray-600">(3 Penilaian)</span>
-          </div>
-        </div>
-
-        <div class="mt-5 flex space-x-2 items-center">
-          <img
-            class="w-10 h-10 rounded-full"
-            src="https://static.vecteezy.com/system/resources/thumbnails/019/900/306/small_2x/happy-young-cute-illustration-face-profile-png.png"
-            alt="user photo"
-          />
-          <p class="text-lg font-bold">Skin1004 Official Shop</p>
-        </div>
-
-        <!-- Shipping & Location -->
-        <div class="mt-5 space-y-1 text-gray-600">
-          <div class="flex items-center gap-2">
-            <span class="text-green-600">Gratis Ongkir</span>
-            <span>Pengiriman Ke</span>
-            <span class="font-semibold">KOTA JAKARTA PUSAT</span>
-          </div>
-        </div>
-        <div class="mt-1 flex items-center gap-1">
-          <p class="text-gray-600">Kondisi:</p>
-          <p>Baru</p>
-        </div>
-        <div class="mt-1 flex items-center gap-1">
-          <p class="text-gray-600">Min. Pemesanan:</p>
-          <p>1</p>
-        </div>
-        <div class="mt-5">
-          <p>Deskripsi produk:</p>
-          <div
-            class="description text-gray-700 text-sm max-h-36 overflow-hidden transition-all duration-300"
-            id="product-description"
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-            quas magni porro, facere quae eos ipsum! Soluta iusto cum iure omnis
-            quaerat asperiores consequatur nostrum sequi voluptates? Minus,
-            neque sit. Deleniti quam ducimus molestias ut harum voluptates ipsam
-            qui recusandae veritatis asperiores impedit unde aliquid ipsa, eaque
-            veniam obcaecati earum laudantium vitae voluptas, in eum? Dicta qui,
-            iure possimus neque eligendi earum animi cupiditate accusantium
-            deserunt ratione fuga nisi placeat quia quasi laboriosam impedit
-            sapiente sint cumque in delectus asperiores aspernatur facere.
-            Voluptatum explicabo impedit error, libero corporis eum. Porro unde
-            aliquam, delectus a nulla deleniti quae? Corporis suscipit
-            voluptatem consequatur atque. Quam, voluptatum libero vel laudantium
-            sequi aliquid quisquam aspernatur laboriosam natus aperiam nemo
-            similique harum soluta neque consequatur necessitatibus possimus
-            odit facilis ipsum reiciendis? Quod dicta, magni laboriosam officia
-            sapiente quis eum impedit. Aspernatur sequi nostrum accusamus
-            laudantium sunt voluptates corporis tempora minus, fugit, soluta hic
-            voluptate sed!
-          </div>
-          <p
-            class="show-more font-semibold text-blue-500 cursor-pointer hidden"
-            id="show-more-button"
-          >
-            Show more
-          </p>
-        </div>
+        <div class="product-details-container container-fluid"></div>
+        <p
+          class="show-more font-semibold text-blue-500 cursor-pointer hidden"
+          id="show-more-button"
+        >
+          Show more
+        </p>
 
         <!-- Quantity Selector -->
         <div class="mt-5 flex items-center">
@@ -461,20 +405,177 @@
     </div>
   </body>
   <script>
-    // Mendapatkan elemen gambar utama
-    const mainImage = document.getElementById("main-image");
-    // Mendapatkan semua elemen thumbnail
-    const thumbnails = document.querySelectorAll("#thumbnail-container img");
-
-    // Menambahkan event listener pada setiap thumbnail
-    thumbnails.forEach((thumbnail) => {
-      thumbnail.addEventListener("click", () => {
-        // Mengganti src gambar utama dengan src thumbnail yang diklik
-        mainImage.src = thumbnail.src;
-      });
-    });
-
     document.addEventListener("DOMContentLoaded", function () {
+      console.log("DOMContentLoaded triggered");
+
+      // Ambil elemen gambar utama
+      const mainImage = document.getElementById("main-image");
+      const thumbnailImage = document.getElementById("thumbnail1");
+      const thumbnailImage2 = document.getElementById("thumbnail2");
+      const thumbnailImage3 = document.getElementById("thumbnail3");
+      const thumbnailImage4 = document.getElementById("thumbnail4");
+      const thumbnailImage5 = document.getElementById("thumbnail5");
+      // Ambil elemen thumbnail
+      const thumbnails = document.querySelectorAll("#thumbnail-container img");
+
+      // Event listener untuk thumbnail
+      const initialThumbnail = document.getElementById("thumbnail1");
+      initialThumbnail.classList.add("border-red-500");
+
+      // Event listener untuk thumbnail
+      thumbnails.forEach((thumbnail) => {
+        thumbnail.addEventListener("click", () => {
+          // Ganti gambar utama dengan thumbnail yang diklik
+          mainImage.src = thumbnail.src;
+
+          // Hapus border merah dari semua thumbnail
+          thumbnails.forEach((thumb) => {
+            thumb.classList.remove("border-red-500");
+          });
+
+          // Tambahkan border merah ke thumbnail yang diklik
+          thumbnail.classList.add("border-red-500");
+        });
+      });
+
+      // Ambil `id_product` dari URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const nameProduct = urlParams.get("name");
+
+      // Pastikan `id_product` tersedia
+      if (nameProduct) {
+        fetchProductDetail(nameProduct);
+      }
+
+      // Fungsi untuk mengambil detail produk dari API
+      async function fetchProductDetail(nameProduct) {
+        try {
+          const response = await fetch(
+            `https://5wbr7sngsd.execute-api.us-east-1.amazonaws.com/default/rdslambda?name=${nameProduct}`
+          );
+
+          if (!response.ok) {
+            throw new Error(
+              `Gagal mengambil detail produk. Status: ${response.status}`
+            );
+          }
+
+          const productDetail = await response.json();
+          // Jika response berupa array, ambil item pertama
+          const product = Array.isArray(productDetail)
+            ? productDetail[0]
+            : productDetail;
+
+          renderProductDetail(product);
+        } catch (error) {
+          console.error("Error fetching product details:", error);
+        }
+      }
+
+      // Fungsi untuk menampilkan detail produk ke halaman
+      function renderProductDetail(product) {
+        if (!product || Object.keys(product).length === 0) {
+          document.querySelector(".product-details-container").innerHTML =
+            "<p>Detail produk tidak ditemukan.</p>";
+          return;
+        }
+
+        document.title = `E-commerce | ${product.name}`;
+
+        // Isi elemen HTML dengan data produk
+        mainImage.src = `https://ccecommerce.s3.us-east-1.amazonaws.com/img/${encodeURIComponent(
+          product.name
+        )}.jpg`;
+        thumbnailImage.src = `https://ccecommerce.s3.us-east-1.amazonaws.com/img/${encodeURIComponent(
+          product.name
+        )}.jpg`;
+        thumbnailImage2.src = `https://ccecommerce.s3.us-east-1.amazonaws.com/img/${encodeURIComponent(
+          product.name
+        )}(2).jpg`;
+        thumbnailImage3.src = `https://ccecommerce.s3.us-east-1.amazonaws.com/img/${encodeURIComponent(
+          product.name
+        )}(3).jpg`;
+        thumbnailImage4.src = `https://ccecommerce.s3.us-east-1.amazonaws.com/img/${encodeURIComponent(
+          product.name
+        )}(4).jpg`;
+        thumbnailImage5.src = `https://ccecommerce.s3.us-east-1.amazonaws.com/img/${encodeURIComponent(
+          product.name
+        )}(5).jpg`;
+        document.querySelector(".product-details-container").innerHTML = `
+          <div class="flex items-center gap-2">
+              <h1 class="text-2xl font-semibold">
+                ${product.name}
+              </h1>
+            </div>
+            <div class="flex space-x-5 items-center">
+              <p class="mt-2 text-3xl font-bold text-red-600">Rp${product.price.toLocaleString(
+                "id-ID"
+              )}</p>
+              <div class="flex items-center mt-2 text-yellow-500 text-lg">
+                <span class="flex items-center">
+                  ${product.rating}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
+                    />
+                  </svg>
+                </span>
+                <span class="ml-2 text-gray-600">(3 Penilaian)</span>
+              </div>
+            </div>
+            <p class="text-sm font-bold text-gray-500 mt-2 uppercase">Sisa stock: ${
+              product.stock
+            }</p>
+            <div class="mt-5 flex space-x-2 items-center">
+              <img
+                class="w-10 h-10 rounded-full"
+                src="https://static.vecteezy.com/system/resources/thumbnails/019/900/306/small_2x/happy-young-cute-illustration-face-profile-png.png"
+                alt="user photo"
+              />
+              <p class="text-lg font-bold">${product.store}</p>
+            </div>
+            <div class="mt-5 space-y-1 text-gray-600">
+              <div class="flex items-center gap-2">
+                <span class="text-green-600">Gratis Ongkir</span>
+                <span>Pengiriman Ke</span>
+                <span class="font-semibold uppercase">KOTA ${
+                  product.location
+                }</span>
+              </div>
+            </div>
+            <div class="mt-1 flex items-center gap-1">
+              <p class="text-gray-600">Kondisi:</p>
+              <p>${product.condition}</p>
+            </div>
+            <div class="mt-1 flex items-center gap-1">
+              <p class="text-gray-600">Min. Pemesanan:</p>
+              <p>${product.minimum}</p>
+            </div>
+            <div class="mt-5">
+              <p class="font-semibold">Deskripsi produk:</p>
+              <div
+  class="description text-gray-700 text-sm overflow-hidden transition-all duration-300 ease-in-out"
+  id="product-description"
+>
+  ${product.description.replace(/\n/g, "<br>")}
+</div>
+              <p
+                class="show-more font-semibold text-blue-500 cursor-pointer hidden"
+                id="show-more-button"
+              >
+                Show more
+              </p>
+            </div>
+        `;
+
+        initializeShowMore();
+      }
+
       const input = document.getElementById("counter-input");
       const decrementButton = document.getElementById("decrement-button");
 
@@ -485,19 +586,39 @@
         }
       });
 
-      const description = document.getElementById("product-description");
-      const showMoreButton = document.getElementById("show-more-button");
+      function initializeShowMore() {
+        const description = document.getElementById("product-description");
+        const showMoreButton = document.getElementById("show-more-button");
 
-      // Periksa apakah isi deskripsi melebihi max-height
-      if (description.scrollHeight > description.clientHeight) {
-        showMoreButton.classList.remove("hidden");
+        // Pastikan tombol "Show More" hanya muncul jika konten lebih panjang dari ruang yang tersedia
+        if (description.scrollHeight > description.clientHeight) {
+          showMoreButton.classList.remove("hidden");
+        }
+
+        showMoreButton.addEventListener("click", () => {
+          // Toggle class expanded untuk mengubah tinggi konten
+          const isExpanded = description.classList.toggle("expanded");
+
+          // Ubah teks tombol sesuai status expand/collapse
+          showMoreButton.textContent = isExpanded ? "Show less" : "Show more";
+        });
       }
-
-      showMoreButton.addEventListener("click", () => {
-        const isExpanded = description.classList.toggle("max-h-36");
-        description.classList.toggle("overflow-hidden", isExpanded);
-        showMoreButton.textContent = isExpanded ? "Show more" : "Show less";
-      });
     });
+    document
+      .getElementById("search-navbar")
+      .addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          const searchInput = document
+            .getElementById("search-navbar")
+            .value.trim();
+
+          // Jika input pencarian tidak kosong, kita akan mengirimkan query ke items.html
+          if (searchInput) {
+            window.location.href = `items.html?search=${encodeURIComponent(
+              searchInput
+            )}`;
+          }
+        }
+      });
   </script>
 </html>
