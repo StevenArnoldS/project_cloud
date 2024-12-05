@@ -11,6 +11,12 @@
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <!-- Tambahkan di header HTML -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -29,9 +35,62 @@
       .show-more {
         transition: opacity 0.3s ease-in-out; /* Transisi untuk tombol show more */
       }
+      .fullscreen-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.7); /* Hitam dengan transparansi */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Pastikan loader berada di atas semua elemen */
+      }
+      .fullscreen-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.7); /* Hitam dengan transparansi */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Pastikan loader berada di atas semua elemen */
+      }
+
+      .loader {
+        width: 50px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(
+              farthest-side,
+              rgba(255, 255, 255, 0.7) 94%,
+              transparent
+            )
+            top/8px 8px no-repeat,
+          conic-gradient(transparent 30%, rgba(255, 255, 255, 0.9));
+        -webkit-mask: radial-gradient(
+          farthest-side,
+          transparent calc(100% - 8px),
+          #000 0
+        );
+        animation: l13 1s infinite linear;
+      }
+
+      @keyframes l13 {
+        100% {
+          transform: rotate(1turn);
+        }
+      }
     </style>
   </head>
   <body>
+    <div id="fullscreen-loader" class="fullscreen-loader hidden">
+      <div class="loader"></div>
+    </div>
+
     <nav class="bg-gray-900 shadow">
       <div
         class="max-w-screen-xl flex items-center justify-between mx-auto p-5"
@@ -257,8 +316,9 @@
                   type="text"
                   id="counter-input"
                   data-input-counter
+                  data-input-counter-min="1"
                   class="flex-shrink-0 text-gray-900 border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center"
-                  value="0"
+                  value="1"
                   readonly
                   required
                 />
@@ -292,12 +352,12 @@
         <!-- Action Buttons -->
         <div class="mt-6 flex gap-4">
           <button
-            class="flex-1 px-4 py-2 bg-[#959EC9] text-white font-semibold rounded-lg hover:bg-[#28264B]"
+            class="add-cart flex-1 px-4 py-2 bg-[#959EC9] text-white font-semibold rounded-lg hover:bg-[#28264B]"
           >
             Masukkan Keranjang
           </button>
           <button
-            class="flex-1 px-4 py-2 bg-[#4E5174] text-white font-semibold rounded-lg hover:bg-[#28264B]"
+            class="checkout flex-1 px-4 py-2 bg-[#4E5174] text-white font-semibold rounded-lg hover:bg-[#28264B]"
           >
             Beli Sekarang
           </button>
@@ -306,108 +366,11 @@
     </div>
     <div class="max-w-screen-xl mx-auto px-5 my-8">
       <h2 class="text-xl font-bold mb-4">Ulasan Produk</h2>
-      <div class="space-y-6">
-        <!-- Review 1 -->
-        <div class="flex items-start space-x-4">
-          <img
-            class="w-10 h-10 rounded-full"
-            src="https://randomuser.me/api/portraits/men/32.jpg"
-            alt="Reviewer 1"
-          />
-          <div class="flex-1">
-            <div class="flex items-center">
-              <p class="font-semibold">Alex</p>
-              <span class="ml-2 text-sm text-gray-500">2 minggu lalu</span>
-            </div>
-            <div class="flex items-center text-yellow-500 text-sm">★★★★★</div>
-            <p class="mt-1 text-gray-800">Lucu bangett ✨✨✨</p>
-          </div>
-        </div>
-        <hr />
-
-        <!-- Review 2 -->
-        <div class="flex items-start space-x-4">
-          <img
-            class="w-10 h-10 rounded-full"
-            src="https://randomuser.me/api/portraits/women/44.jpg"
-            alt="Reviewer 2"
-          />
-          <div class="flex-1">
-            <div class="flex items-center">
-              <p class="font-semibold">Maria</p>
-              <span class="ml-2 text-sm text-gray-500">1 bulan lalu</span>
-            </div>
-            <div class="flex items-center text-yellow-500 text-sm">★★★★★</div>
-            <p class="mt-1 text-gray-800">
-              Sesuai ekspektasi! Barang bagus dan lucu banget 😍
-            </p>
-          </div>
-        </div>
-        <hr />
-
-        <!-- Review 3 -->
-        <div class="flex items-start space-x-4">
-          <img
-            class="w-10 h-10 rounded-full"
-            src="https://randomuser.me/api/portraits/men/45.jpg"
-            alt="Reviewer 3"
-          />
-          <div class="flex-1">
-            <div class="flex items-center">
-              <p class="font-semibold">Rendy</p>
-              <span class="ml-2 text-sm text-gray-500">3 minggu lalu</span>
-            </div>
-            <div class="flex items-center text-yellow-500 text-sm">★★★★☆</div>
-            <p class="mt-1 text-gray-800">Bagus tapi pengiriman agak lambat.</p>
-          </div>
-        </div>
-        <hr />
-
-        <!-- Review 4 -->
-        <div class="flex items-start space-x-4">
-          <img
-            class="w-10 h-10 rounded-full"
-            src="https://randomuser.me/api/portraits/women/30.jpg"
-            alt="Reviewer 4"
-          />
-          <div class="flex-1">
-            <div class="flex items-center">
-              <p class="font-semibold">Siti</p>
-              <span class="ml-2 text-sm text-gray-500">1 minggu lalu</span>
-            </div>
-            <div class="flex items-center text-yellow-500 text-sm">★★★★★</div>
-            <p class="mt-1 text-gray-800">
-              Barang aman sampai di rumah, kualitas sesuai harga 👍
-            </p>
-          </div>
-        </div>
-        <hr />
-
-        <!-- Review 5 -->
-        <div class="flex items-start space-x-4">
-          <img
-            class="w-10 h-10 rounded-full"
-            src="https://randomuser.me/api/portraits/men/52.jpg"
-            alt="Reviewer 5"
-          />
-          <div class="flex-1">
-            <div class="flex items-center">
-              <p class="font-semibold">David</p>
-              <span class="ml-2 text-sm text-gray-500">4 hari lalu</span>
-            </div>
-            <div class="flex items-center text-yellow-500 text-sm">★★★★★</div>
-            <p class="mt-1 text-gray-800">
-              Produk sangat memuaskan, sesuai deskripsi!
-            </p>
-          </div>
-        </div>
-      </div>
+      <div class="review-container space-y-6"></div>
     </div>
   </body>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      console.log("DOMContentLoaded triggered");
-
       // Ambil elemen gambar utama
       const mainImage = document.getElementById("main-image");
       const thumbnailImage = document.getElementById("thumbnail1");
@@ -576,16 +539,6 @@
         initializeShowMore();
       }
 
-      const input = document.getElementById("counter-input");
-      const decrementButton = document.getElementById("decrement-button");
-
-      decrementButton.addEventListener("click", () => {
-        let currentValue = parseInt(input.value, 10);
-        if (currentValue == 0) {
-          input.value += 1;
-        }
-      });
-
       function initializeShowMore() {
         const description = document.getElementById("product-description");
         const showMoreButton = document.getElementById("show-more-button");
@@ -620,5 +573,192 @@
           }
         }
       });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const productName = urlParams.get("name");
+
+    if (productName) {
+      fetchReviews(productName);
+    }
+
+    // Fungsi untuk mengambil review berdasarkan produk
+    async function fetchReviews(productName) {
+      try {
+        const response = await fetch(
+          `https://9i2v952rwf.execute-api.us-east-1.amazonaws.com/default/get_reviews?name=${encodeURIComponent(
+            productName
+          )}`
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            `Gagal mengambil data review. Status: ${response.status}`
+          );
+        }
+
+        const reviews = await response.json();
+
+        if (reviews.success && reviews.data.length > 0) {
+          renderReviews(reviews.data);
+        } else {
+          document.querySelector(".review-container").innerHTML = `
+          <p class="text-gray-500">Belum ada ulasan untuk produk ini.</p>
+        `;
+        }
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+        document.querySelector(".review-container").innerHTML = `
+        <p class="text-red-500">Gagal memuat ulasan produk.</p>
+      `;
+      }
+    }
+
+    // Fungsi untuk menampilkan ulasan di halaman
+    function renderReviews(reviews) {
+      const reviewContainer = document.querySelector(".review-container");
+      reviewContainer.innerHTML = ""; // Kosongkan kontainer sebelum ditambahkan ulasan baru
+
+      reviews.forEach((review) => {
+        const stars = "★".repeat(review.rate) + "☆".repeat(5 - review.rate); // Simbol bintang
+
+        // Periksa apakah tanggal valid sebelum memformat
+        const reviewDate = review.date
+          ? new Date(review.date)
+              .toLocaleString("id-ID", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false, // Gunakan format 24 jam
+              })
+              .replace(/\./g, ":") // Ganti titik dengan titik dua
+          : "Tanggal tidak tersedia";
+
+        const reviewHtml = `
+    <div class="flex items-start space-x-4">
+      <img
+        class="w-10 h-10 rounded-full"
+        src="https://randomuser.me/api/portraits/men/32.jpg"
+      />
+      <div class="flex-1">
+        <div class="flex items-center">
+          <p class="font-semibold">${review.user_name || "Reviewer"}</p>
+          <span class="ml-2 text-sm text-gray-500">${reviewDate}</span>
+        </div>
+        <div class="flex items-center text-yellow-500 text-sm">${stars}</div>
+        <p class="mt-1 text-gray-800">${
+          review.comment || "Tidak ada komentar."
+        }</p>
+      </div>
+    </div>
+    <hr />
+  `;
+
+        reviewContainer.insertAdjacentHTML("beforeend", reviewHtml);
+      });
+    }
+
+    const addToCartButton = document.querySelector(".add-cart");
+    const input = document.getElementById("counter-input");
+    const loader = document.getElementById("fullscreen-loader");
+
+    addToCartButton.addEventListener("click", async () => {
+      // Tampilkan loader dan nonaktifkan scroll
+      loader.classList.remove("hidden");
+      document.body.classList.add("no-scroll");
+
+      try {
+        // Ambil nama produk dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productName = urlParams.get("name");
+
+        if (!productName) {
+          alert("Nama produk tidak ditemukan.");
+          loader.classList.add("hidden");
+          document.body.classList.remove("no-scroll");
+          return;
+        }
+
+        // Ambil quantity dari input
+        const qty = parseInt(input.value, 10);
+        if (isNaN(qty) || qty <= 0) {
+          alert("Jumlah produk tidak valid.");
+          loader.classList.add("hidden");
+          document.body.classList.remove("no-scroll");
+          return;
+        }
+
+        // Panggil API Lambda
+        const response = await fetch(
+          `https://k6yyb566rc.execute-api.us-east-1.amazonaws.com/default/add_cart?name=${encodeURIComponent(
+            productName
+          )}&qty=${qty}`,
+          { method: "GET" }
+        );
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          Swal.fire({
+            title: "Success!",
+            text: result.message,
+            icon: "success",
+            confirmButtonText: "OK",
+            buttonsStyling: false,
+            customClass: {
+              confirmButton:
+                "bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-800",
+            },
+          });
+        } else {
+          Swal.fire({
+            title: "Failed",
+            text: result.message || "Gagal menambahkan ke keranjang.",
+            icon: "error",
+            confirmButtonText: "OK",
+            buttonsStyling: false,
+            customClass: {
+              confirmButton:
+                "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-800",
+            },
+          });
+        }
+      } catch (error) {
+        console.error("Error adding product to cart:", error);
+        Swal.fire({
+          title: "Error",
+          text: "Terjadi kesalahan saat menambahkan produk ke keranjang.",
+          icon: "error",
+          confirmButtonText: "OK",
+          buttonsStyling: false,
+          customClass: {
+            confirmButton:
+              "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-800",
+          },
+        });
+      } finally {
+        // Sembunyikan loader dan aktifkan kembali scroll
+        loader.classList.add("hidden");
+        document.body.classList.remove("no-scroll");
+      }
+    });
+
+    const checkoutButton = document.querySelector(".checkout");
+
+    checkoutButton.addEventListener("click", function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productName = urlParams.get("name");
+      const qtyInput = document.getElementById("counter-input");
+      const qty = parseInt(qtyInput.value, 10);
+
+      if (productName && qty > 0) {
+        window.location.href = `checkout.html?name=${encodeURIComponent(
+          productName
+        )}&qty=${qty}`;
+      } else {
+        alert("Nama produk atau jumlah tidak valid.");
+      }
+    });
   </script>
 </html>
