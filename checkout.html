@@ -15,8 +15,60 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <style>
+      input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+      .fullscreen-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.7); /* Hitam dengan transparansi */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Pastikan loader berada di atas semua elemen */
+      }
+
+      .loader {
+        width: 50px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(
+              farthest-side,
+              rgba(255, 255, 255, 0.7) 94%,
+              transparent
+            )
+            top/8px 8px no-repeat,
+          conic-gradient(transparent 30%, rgba(255, 255, 255, 0.9));
+        -webkit-mask: radial-gradient(
+          farthest-side,
+          transparent calc(100% - 8px),
+          #000 0
+        );
+        animation: l13 1s infinite linear;
+      }
+
+      @keyframes l13 {
+        100% {
+          transform: rotate(1turn);
+        }
+      }
+    </style>
   </head>
   <body>
+    <div id="fullscreen-loader" class="fullscreen-loader hidden">
+      <div class="loader"></div>
+    </div>
     <nav class="bg-gray-900 shadow">
       <div
         class="max-w-screen-xl flex items-center justify-between mx-auto p-5"
@@ -163,11 +215,11 @@
         <div class="details">
           <!-- Alamat -->
           <div
-            class="my-5 w-full max-w-4xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            class="my-5 w-full max-w-4xl bg-white border border-gray-200 rounded-lg shadow"
           >
             <div class="header px-2 pt-4 flex items-center">
               <label
-                class="ms-5 text-xl font-semibold text-gray-400 dark:text-gray-300"
+                class="ms-5 text-xl font-semibold text-gray-400"
                 >Alamat Pengiriman</label
               >
             </div>
@@ -203,7 +255,7 @@
               <button
                 data-modal-target="authentication-modal"
                 data-modal-toggle="authentication-modal"
-                class="block text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                class="block text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 type="button"
               >
                 Ganti alamat
@@ -219,20 +271,20 @@
                 <div class="relative p-4 w-full max-w-xl max-h-full">
                   <!-- Modal content -->
                   <div
-                    class="relative bg-white rounded-lg shadow dark:bg-gray-700"
+                    class="relative bg-white rounded-lg shadow"
                   >
                     <!-- Modal header -->
                     <div
-                      class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+                      class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
                     >
                       <h3
-                        class="text-xl font-semibold text-gray-900 dark:text-white"
+                        class="text-xl font-semibold text-gray-900"
                       >
                         Daftar alamat pengiriman
                       </h3>
                       <button
                         type="button"
-                        class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
                         data-modal-hide="authentication-modal"
                       >
                         <svg
@@ -257,53 +309,7 @@
                     <!-- Modal body -->
                     <div class="p-4 md:p-5">
                       <!-- List alamat -->
-                      <div class="space-y-4 mb-5">
-                        <!-- Alamat 1 -->
-                        <div
-                          class="w-full px-4 py-3 rounded-lg ring-2 ring-gray-200 flex items-start space-x-4"
-                        >
-                          <input
-                            id="default-radio-1"
-                            type="radio"
-                            value=""
-                            name="default-radio"
-                            class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mt-1"
-                          />
-                          <div>
-                            <p
-                              class="text-md font-semibold text-gray-800 dark:text-gray-100"
-                            >
-                              Bonnie Green | 081234567890
-                            </p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">
-                              Jalan Raya Darmo Permai No. 21, Dukuh Pakis,
-                              Surabaya, Jawa Timur, 60226
-                            </p>
-                          </div>
-                        </div>
-                        <!-- Alamat 2 -->
-                        <div
-                          class="w-full px-4 py-3 rounded-lg ring-2 ring-gray-200 flex items-start space-x-4"
-                        >
-                          <input
-                            id="default-radio-1"
-                            type="radio"
-                            value=""
-                            name="default-radio"
-                            class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mt-1"
-                          />
-                          <div>
-                            <p
-                              class="text-md font-semibold text-gray-800 dark:text-gray-100"
-                            >
-                              Karina | 081337654321
-                            </p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">
-                              Jalan Dharmawangsa No. 15, Airlangga, Gubeng,
-                              Surabaya, Jawa Timur, 60286
-                            </p>
-                          </div>
-                        </div>
+                      <div id="addresses-container" class="space-y-4 mb-5">
                       </div>
 
                       <!-- Tambah alamat baru -->
@@ -312,11 +318,11 @@
                           data-modal-target="input-alamat-modal"
                           data-modal-toggle="input-alamat-modal"
                           id="input-alamat-toogle"
-                          class="flex items-center w-52 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                          class="flex items-center w-52 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                         >
                           <span class="mr-2">
                             <svg
-                              class="w-5 h-5 text-white dark:text-white"
+                              class="w-5 h-5 text-white"
                               aria-hidden="true"
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
@@ -349,14 +355,14 @@
               >
                 <div class="relative p-4 w-full max-w-xl max-h-full">
                   <div
-                    class="relative bg-white rounded-lg shadow dark:bg-gray-700"
+                    class="relative bg-white rounded-lg shadow"
                   >
                     <!-- Modal header -->
                     <div
-                      class="p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+                      class="p-4 md:p-5 border-b rounded-t"
                     >
                       <h3
-                        class="text-xl font-semibold text-gray-900 dark:text-white"
+                        class="text-xl font-semibold text-gray-900"
                       >
                         Tambah alamat baru
                       </h3>
@@ -369,6 +375,7 @@
                           >Nama</label
                         >
                         <input
+                        id="Nama"
                           type="text"
                           class="w-full mb-4 p-2 border rounded"
                         />
@@ -376,13 +383,15 @@
                           >Telepon</label
                         >
                         <input
-                          type="text"
+                        id="Telepon"
+                          type="number"
                           class="w-full mb-4 p-2 border rounded"
                         />
                         <label class="text-sm font-semibold" for="Alamat"
                           >Alamat</label
                         >
                         <input
+                        id="Alamat"
                           type="text"
                           class="w-full mb-4 p-2 border rounded"
                         />
@@ -390,6 +399,7 @@
                           >Kelurahan</label
                         >
                         <input
+                        id="Kelurahan"
                           type="text"
                           class="w-full mb-4 p-2 border rounded"
                         />
@@ -397,6 +407,7 @@
                           >Kecamatan</label
                         >
                         <input
+                        id="Kecamatan"
                           type="text"
                           class="w-full mb-4 p-2 border rounded"
                         />
@@ -404,6 +415,7 @@
                           >Kota</label
                         >
                         <input
+                        id="Kota"
                           type="text"
                           class="w-full mb-4 p-2 border rounded"
                         />
@@ -411,6 +423,7 @@
                           >Provinsi</label
                         >
                         <input
+                        id="Provinsi"
                           type="text"
                           class="w-full mb-4 p-2 border rounded"
                         />
@@ -418,13 +431,15 @@
                           >Kode pos</label
                         >
                         <input
-                          type="text"
+                        id="KodePos"
+                          type="number"
                           class="w-full mb-4 p-2 border rounded"
                         />
                         <div class="flex justify-between">
                           <button
                             type="submit"
                             class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                            data-modal-hide="input-alamat-modal"
                           >
                             Simpan
                           </button>
@@ -447,7 +462,7 @@
 
           <!-- Produk -->
           <div
-            class="product-card my-5 w-full max-w-4xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            class="product-card my-5 w-full max-w-4xl bg-white border border-gray-200 rounded-lg shadow"
           >
             <div class="container-item">
               <!-- Header Toko -->
@@ -456,7 +471,7 @@
             <div class="ekspedisi">
               <div class="header px-2 pt-4 flex items-center">
                 <label
-                  class="ms-5 text-md font-semibold text-gray-400 dark:text-gray-300"
+                  class="ms-5 text-md font-semibold text-gray-400"
                   >Pilih Pengiriman</label
                 >
               </div>
@@ -464,7 +479,7 @@
                 <!-- Dropdown -->
                 <select
                   id="ekspedisiDropdown"
-                  class="w-full p-2 border rounded-lg bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  class="w-full p-2 border rounded-lg bg-gray-100 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="reguler" selected>Reguler (Rp 21.500)</option>
                   <option value="kargo">Kargo (Rp 60.000)</option>
@@ -474,7 +489,7 @@
                 <div id="ekspedisiDetail" class="mt-4 px-1 hidden space-y-2">
                   <h3
                     id="ekspedisiName"
-                    class="text-lg font-medium text-gray-900 dark:text-gray-300"
+                    class="text-lg font-medium text-gray-900"
                   ></h3>
                   <p
                     id="ekspedisiEstimasi"
@@ -495,63 +510,63 @@
           class="mx-auto pt-5 pl-8 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full"
         >
           <div
-            class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6"
+            class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm sm:p-6"
           >
-            <p class="text-xl font-semibold text-gray-900 dark:text-white">
+            <p class="text-xl font-semibold text-gray-900">
               Ringkasan belanja
             </p>
 
             <div class="space-y-4">
               <div class="space-y-2">
                 <dl
-                  class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700"
+                  class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2"
                 >
                   <dt
-                    class="text-base font-normal text-gray-900 dark:text-white"
+                    class="text-base font-normal text-gray-900"
                   >
                     Total Harga
                   </dt>
                   <dd
-                    class="total-harga text-base font-normal text-gray-900 dark:text-white"
+                    class="total-harga text-base font-normal text-gray-900"
                   ></dd>
                 </dl>
                 <dl
-                  class="flex items-center justify-between gap-4 dark:border-gray-700"
+                  class="flex items-center justify-between gap-4"
                 >
                   <dt
-                    class="text-base font-normal text-gray-900 dark:text-white"
+                    class="text-base font-normal text-gray-900"
                   >
                     Total Ongkos Kirim
                   </dt>
                   <dd
-                    class="ongkir text-base font-normal text-gray-900 dark:text-white"
+                    class="ongkir text-base font-normal text-gray-900"
                   >
                   </dd>
                 </dl>
                 <dl
-                  class="flex items-center justify-between gap-4 dark:border-gray-700"
+                  class="flex items-center justify-between gap-4"
                 >
                   <dt
-                    class="text-base font-normal text-gray-900 dark:text-white"
+                    class="text-base font-normal text-gray-900"
                   >
                     Biaya Platform
                   </dt>
                   <dd
-                    class="text-base font-normal text-gray-900 dark:text-white"
+                    class="text-base font-normal text-gray-900"
                   >
                     Rp 1.000
                   </dd>
                 </dl>
                 <dl
-                  class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700"
+                  class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2"
                 >
                   <dt
-                    class="text-base font-normal text-gray-900 dark:text-white"
+                    class="text-base font-normal text-gray-900"
                   >
                     Total Tagihan
                   </dt>
                   <dd
-                    class="total-tagihan text-base font-normal text-gray-900 dark:text-white"
+                    class="total-tagihan text-base font-normal text-gray-900"
                   ></dd>
               </div>
 
@@ -559,7 +574,7 @@
               <div class="metode-pembayaran">
                 <div class="header px-1 pt-4 flex items-center">
                   <label
-                    class="text-md font-semibold text-gray-400 dark:text-gray-300"
+                    class="text-md font-semibold text-gray-400"
                     >Pilih Metode Pembayaran</label
                   >
                 </div>
@@ -567,7 +582,7 @@
                   <!-- Dropdown -->
                   <select
                     id="pembayaranDropdown"
-                    class="w-full p-2 border rounded-lg bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full p-2 border rounded-lg bg-gray-100 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="" selected>
                       Pilih salah satu metode pembayaran
@@ -580,7 +595,7 @@
                   <div id="pembayaranDetail" class="mt-4 hidden space-y-2">
                     <h3
                       id="pembayaranName"
-                      class="text-lg font-medium text-gray-900 dark:text-gray-300"
+                      class="text-lg font-medium text-gray-900"
                     ></h3>
                     <p
                       id="pembayaranInfo"
@@ -592,7 +607,7 @@
 
               <a
                 href="checkout.html"
-                class="flex w-full items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                class="flex w-full items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300"
                 >Bayar</a
               >
             </div>
@@ -602,229 +617,162 @@
     </div>
   </body>
   <script>
-    // Modal alamat
-    // Inisialisasi default alamat
-    document.addEventListener("DOMContentLoaded", () => {
-      const defaultName = "Bonnie Green";
-      const defaultAddress = "Jalan Raya Darmo Permai No. 21, Dukuh Pakis, Surabaya, Jawa Timur, 60226";
+    let total_harga = 0;
+    var tmpTagihan = 0;
 
-      document.getElementById("nama").textContent = defaultName;
-      document.getElementById("alamat").textContent = defaultAddress;
+// API Fetch and Rendering
+document.addEventListener("DOMContentLoaded", function () {
+  const total_harga_text = document.querySelector(".total-harga");
 
-      // Pilih radio yang sesuai
-      document.querySelector("input[name='default-radio']").checked = true;
-    });
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get("name");
+  const qty = params.get("qty");
 
-    // // Update alamat berdasarkan pilihan radio
-    const radioButtons = document.querySelectorAll("input[name='default-radio']");
-    radioButtons.forEach((radio) => {
-      radio.addEventListener("change", (event) => {
-        const selectedName = event.target.parentElement.querySelector("p:first-of-type").textContent.split(" | ")[0];
-        const selectedAddress = event.target.parentElement.querySelector("p:last-of-type").textContent;
+  // Validasi parameter
+  if ((name && !qty) || (!name && qty)) {
+    alert(
+      "Invalid parameter: Both 'name' and 'qty' must be provided, or none at all."
+    );
+    window.location.href = "index.html";
+    return;
+  }
 
-        document.getElementById("nama").textContent = selectedName;
-        document.getElementById("alamat").textContent = selectedAddress;
-      });
-    });
-
-    document.addEventListener("DOMContentLoaded", function () {
-      let total_harga = 0;
-      const total_harga_text = document.querySelector(".total-harga");
-      const modalToggleButtons = document.querySelectorAll(
-        "[data-modal-toggle]"
-      );
-
-      // modalToggleButtons.forEach((button) => {
-      //   button.addEventListener("click", function () {
-      //     const targetModalId = this.getAttribute("data-modal-toggle");
-      //     const modal = document.getElementById(targetModalId);
-      //     modal.classList.toggle("hidden");
-      //   });
-      // });
-
-      // // Close modal on clicking the close button
-      // const closeModalButtons = document.querySelectorAll("[data-modal-hide]");
-      // closeModalButtons.forEach((button) => {
-      //   button.addEventListener("click", function () {
-      //     const modal = this.closest(".modal");
-      //     modal.classList.add("hidden");
-      //   });
-      // });
-
-      const params = new URLSearchParams(window.location.search);
-      const name = params.get("name");
-      const qty = params.get("qty");
-
-      // Validasi parameter
-      if ((name && !qty) || (!name && qty)) {
-        alert(
-          "Invalid parameter: Both 'name' and 'qty' must be provided, or none at all."
-        );
-        window.location.href = "index.html";
-        return;
+  async function fetchData() {
+    try {
+      let url =
+        "https://2y33ouer8f.execute-api.us-east-1.amazonaws.com/default/get_checkout";
+      if (name && qty) {
+        url += `?name=${encodeURIComponent(name)}&qty=${encodeURIComponent(
+          qty
+        )}`;
       }
 
-      // Fungsi untuk memanggil API
-      async function fetchData() {
-        try {
-          let url =
-            "https://2y33ouer8f.execute-api.us-east-1.amazonaws.com/default/get_checkout";
-          if (name && qty) {
-            url += `?name=${encodeURIComponent(name)}&qty=${encodeURIComponent(
-              qty
-            )}`;
-          }
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
 
-          const response = await fetch(url);
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
+      const result = await response.json();
+      console.log("API Data:", result);
 
-          const result = await response.json();
-          console.log("API Data:", result);
+      const container = document.querySelector(".container-item");
+      container.innerHTML = ""; // Bersihkan kontainer sebelum menambahkan konten
 
-          const container = document.querySelector(".container-item");
-          container.innerHTML = ""; // Bersihkan kontainer sebelum menambahkan konten
-
-          // Periksa apakah data berupa array (banyak item) atau objek (satu item)
-          if (Array.isArray(result.data)) {
-            // Jika data adalah array
-            result.data.forEach((item, index) => {
-              total_harga += parseInt(`${item.total_price}`, 10);
-              const itemHtml = `
-            <div class="header store-name px-2 py-4 flex items-center">
-              <label class="ms-5 text-md font-bold text-gray-900 dark:text-gray-300">
-                ${item.store}
-              </label>
-            </div>
-            <div class="content grid grid-cols-12 gap-4 items-center pl-7 pb-4">
-              <div class="col-span-2 flex items-center">
-                <img
-                  src="https://ccecommerce.s3.us-east-1.amazonaws.com/img/${encodeURIComponent(
-                    item.name
-                  )}.jpg"
-                  alt="${item.name}"
-                  class="product-image w-20 h-20 rounded border border-gray-200"
-                />
-              </div>
-              <div class="col-span-6">
-                <p class="product-name text-sm font-medium text-gray-900 dark:text-gray-300">
-                  ${item.name}
-                </p>
-              </div>
-              <div class="product-detail col-span-3 text-end text-base font-bold text-gray-900 dark:text-white">
-                ${item.qty} x Rp ${item.price.toLocaleString("id-ID")}
-              </div>
-            </div>
-          `;
-              container.innerHTML += itemHtml;
-            });
-          } else {
-            // Jika data adalah objek
-            total_harga = parseInt(`${result.total_price}`, 10);
-            const itemHtml = `
+      if (Array.isArray(result.data)) {
+        result.data.forEach((item) => {
+          total_harga += Number(item.total_price);
+          const itemHtml = `
           <div class="header store-name px-2 py-4 flex items-center">
-            <label class="ms-5 text-md font-bold text-gray-900 dark:text-gray-300">
-              ${result.store}
+            <label class="ms-5 text-md font-bold text-gray-900">
+              ${item.store}
             </label>
           </div>
           <div class="content grid grid-cols-12 gap-4 items-center pl-7 pb-4">
             <div class="col-span-2 flex items-center">
               <img
                 src="https://ccecommerce.s3.us-east-1.amazonaws.com/img/${encodeURIComponent(
-          result.name
-        )}.jpg"
-                alt="${result.name}"
+                  item.name
+                )}.jpg"
+                alt="${item.name}"
                 class="product-image w-20 h-20 rounded border border-gray-200"
               />
             </div>
             <div class="col-span-6">
-              <p class="product-name text-sm font-medium text-gray-900 dark:text-gray-300">
-                ${result.name}
+              <p class="product-name text-sm font-medium text-gray-900">
+                ${item.name}
               </p>
             </div>
-            <div class="product-detail col-span-3 text-end text-base font-bold text-gray-900 dark:text-white">
-              ${result.qty} x Rp ${result.price.toLocaleString("id-ID")}
+            <div class="product-detail col-span-3 text-end text-base font-bold text-gray-900">
+              ${item.qty} x Rp ${item.price.toLocaleString("id-ID")}
             </div>
           </div>
         `;
-            container.innerHTML += itemHtml;
-          }
-
-          // Perbarui elemen total harga setelah semua data diproses
-          total_harga_text.innerHTML =
-            "Rp " + total_harga.toLocaleString("id-ID");
-        } catch (error) {
-          console.error("Fetch error:", error);
-        }
+          container.innerHTML += itemHtml;
+        });
+      } else {
+        total_harga = Number(result.total_price);
+        const itemHtml = `
+        <div class="header store-name px-2 py-4 flex items-center">
+          <label class="ms-5 text-md font-bold text-gray-900">
+            ${result.store}
+          </label>
+        </div>
+        <div class="content grid grid-cols-12 gap-4 items-center pl-7 pb-4">
+          <div class="col-span-2 flex items-center">
+            <img
+              src="https://ccecommerce.s3.us-east-1.amazonaws.com/img/${encodeURIComponent(
+          result.name
+        )}.jpg"
+              alt="${result.name}"
+              class="product-image w-20 h-20 rounded border border-gray-200"
+            />
+          </div>
+          <div class="col-span-6">
+            <p class="product-name text-sm font-medium text-gray-900">
+              ${result.name}
+            </p>
+          </div>
+          <div class="product-detail col-span-3 text-end text-base font-bold text-gray-900">
+            ${result.qty} x Rp ${result.price.toLocaleString("id-ID")}
+          </div>
+        </div>
+      `;
+        container.innerHTML += itemHtml;
       }
 
-      // Panggil API
-      fetchData();
-    });
-
-    // Ekspedisi
-    const ekspedisiDropdown = document.getElementById("ekspedisiDropdown");
-    const ekspedisiDetail = document.getElementById("ekspedisiDetail");
-    const ekspedisiName = document.getElementById("ekspedisiName");
-    const ekspedisiEstimasi = document.getElementById("ekspedisiEstimasi");
-    const ekspedisiInfo = document.getElementById("ekspedisiInfo");
-
-    const ekspedisiData = {
-      reguler: {
-        name: "Reguler (Rp 21.500)",
-        ongkir: 21500,
-        estimasi: "Estimasi tiba 21 - 25 Nov",
-        info: "",
-      },
-      kargo: {
-        name: "Kargo (Rp 60.000)",
-        ongkir: 60000,
-        estimasi: "Estimasi tiba 21 - 25 Nov",
-        info: "Rekomendasi berat di atas 5kg",
-      },
-      ekonomi: {
-        name: "Ekonomi (Rp 14.000)",
-        ongkir: 14000,
-        estimasi: "Estimasi tiba 21 - 25 Nov",
-        info: "",
-      },
-    };
-
-    const biayaPlatform = 1000; // Biaya platform tetap
-    let total_harga = 0; // Total harga barang (diperoleh dari API)
-    const ongkirDetail = document.querySelector(".ongkir");
-
-    // Menghitung total tagihan
-    function updateTotalTagihan() {
-      const ongkir = parseInt(ongkirDetail.textContent.replace(/\D/g, ""), 10) || 0; // Default ke 0 jika tidak ada ongkir
-      const totalTagihan = total_harga + ongkir + biayaPlatform;
-
-      document.querySelector(".total-tagihan").textContent =
-        "Rp " + totalTagihan.toLocaleString("id-ID");
-    }
-
-    // Set default ongkir ke "Reguler"
-    document.addEventListener("DOMContentLoaded", () => {
-      const defaultEkspedisi = "reguler"; // Atur default ekspedisi
-      ekspedisiDropdown.value = defaultEkspedisi;
-
-      // Tampilkan detail ekspedisi default
-      const defaultData = ekspedisiData[defaultEkspedisi];
-      ongkirDetail.textContent = "Rp " + defaultData.ongkir.toLocaleString("id-ID");
+      total_harga_text.innerHTML =
+        "Rp " + Number(total_harga).toLocaleString("id-ID");
       updateTotalTagihan();
-    });
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  }
 
-    // Update ongkir saat dropdown berubah
-    ekspedisiDropdown.addEventListener("change", () => {
-      const selectedValue = ekspedisiDropdown.value;
+  fetchData();
+});
 
-      if (selectedValue && ekspedisiData[selectedValue]) {
-        const selectedData = ekspedisiData[selectedValue];
-        ongkirDetail.textContent = "Rp " + selectedData.ongkir.toLocaleString("id-ID");
-        updateTotalTagihan();
-      }
-    });
+// Ekspedisi
+const ekspedisiDropdown = document.getElementById("ekspedisiDropdown");
+const ongkirDetail = document.querySelector(".ongkir");
+
+const ekspedisiData = {
+  reguler: {
+    ongkir: 21500,
+  },
+  kargo: {
+    ongkir: 60000,
+  },
+  ekonomi: {
+    ongkir: 14000,
+  },
+};
+
+const biayaPlatform = 1000;
+
+function updateTotalTagihan() {
+  const ongkir = parseInt(ongkirDetail.textContent.replace(/\D/g, ""), 10) || 0;
+  const totalTagihan = Number(total_harga) + ongkir + biayaPlatform;
+
+  document.querySelector(".total-tagihan").textContent =
+    "Rp " + totalTagihan.toLocaleString("id-ID");
+    tmpTagihan = totalTagihan;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  ekspedisiDropdown.value = "reguler";
+  ongkirDetail.textContent =
+    "Rp " + ekspedisiData["reguler"].ongkir.toLocaleString("id-ID");
+  updateTotalTagihan();
+});
+
+ekspedisiDropdown.addEventListener("change", () => {
+  const selectedValue = ekspedisiDropdown.value;
+  if (selectedValue && ekspedisiData[selectedValue]) {
+    ongkirDetail.textContent =
+      "Rp " + ekspedisiData[selectedValue].ongkir.toLocaleString("id-ID");
+    updateTotalTagihan();
+  }
+});
 
     // Metode pembayaran
     const pembayaranDropdown = document.getElementById("pembayaranDropdown");
@@ -857,5 +805,213 @@
         pembayaranDetail.classList.add("hidden");
       }
     });
+    document.addEventListener("DOMContentLoaded", () => {
+  const addAddressModal = document.getElementById("input-alamat-modal");
+  const addAddressForm = addAddressModal.querySelector("form");
+  const cancelButton = document.getElementById("cancelInputAlamat");
+  const loader = document.getElementById("fullscreen-loader");
+
+  // Tombol "Batal"
+  cancelButton.addEventListener("click", () => {
+    addAddressModal.classList.add("hidden");
+  });
+
+  // Tombol "Simpan"
+  addAddressForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    // Tampilkan loader
+    loader.classList.remove("hidden");
+    document.body.classList.add("no-scroll");
+
+    try {
+      // Ambil data dari input form
+      const name = document.getElementById("Nama").value;
+      const phone = document.getElementById("Telepon").value;
+      const address = document.getElementById("Alamat").value;
+      const kelurahan = document.getElementById("Kelurahan").value;
+      const kecamatan = document.getElementById("Kecamatan").value;
+      const kota = document.getElementById("Kota").value;
+      const provinsi = document.getElementById("Provinsi").value;
+      const kodePos = document.getElementById("KodePos").value;
+
+      // Validasi input
+      if (
+        !name ||
+        !phone ||
+        !address ||
+        !kelurahan ||
+        !kecamatan ||
+        !kota ||
+        !provinsi ||
+        !kodePos
+      ) {
+        alert("Semua data harus diisi.");
+        loader.classList.add("hidden");
+        document.body.classList.remove("no-scroll");
+        return;
+      }
+
+      // Panggil API Lambda
+      const response = await fetch(
+        `https://bk5mxpz366.execute-api.us-east-1.amazonaws.com/default/add_address?name=${encodeURIComponent(
+          name
+        )}&phone=${encodeURIComponent(phone)}&address=${encodeURIComponent(
+          address
+        )}&kelurahan=${encodeURIComponent(
+          kelurahan
+        )}&kecamatan=${encodeURIComponent(
+          kecamatan
+        )}&kota=${encodeURIComponent(kota)}&provinsi=${encodeURIComponent(
+          provinsi
+        )}&kode_pos=${encodeURIComponent(kodePos)}`,
+        { method: "GET" }
+      );
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        Swal.fire({
+          title: "Success!",
+          text: result.message,
+          icon: "success",
+          confirmButtonText: "OK",
+          buttonsStyling: false,
+          customClass: {
+            confirmButton:
+              "bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-800",
+          },
+        });
+
+        // Reset form dan sembunyikan modal
+        addAddressForm.reset();
+        addAddressModal.classList.add("hidden");
+      } else {
+        Swal.fire({
+          title: "Failed",
+          text: result.message || "Gagal menambahkan alamat.",
+          icon: "error",
+          confirmButtonText: "OK",
+          buttonsStyling: false,
+          customClass: {
+            confirmButton:
+              "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-800",
+          },
+        });
+      }
+    } catch (error) {
+      console.error("Error adding address:", error);
+      Swal.fire({
+        title: "Error",
+        text: "Terjadi kesalahan saat menambahkan alamat.",
+        icon: "error",
+        confirmButtonText: "OK",
+        buttonsStyling: false,
+        customClass: {
+          confirmButton:
+            "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-800",
+        },
+      });
+    } finally {
+      // Sembunyikan loader
+      loader.classList.add("hidden");
+      document.body.classList.remove("no-scroll");
+      fetchAddresses();
+    }
+  });
+});
+
+  // Fungsi untuk mengambil alamat
+  const fetchAddresses = async () => {
+    try {
+      const response = await fetch(
+        "https://ewml8foh5d.execute-api.us-east-1.amazonaws.com/default/get_address"
+      );
+      const addresses = await response.json();
+
+      console.log("Fetched addresses:", addresses); // Debug: Cek data yang diterima dari API
+
+      if (!addresses || addresses.length === 0) {
+        console.error("No addresses found or API failed.");
+        return;
+      }
+
+      const container = document.getElementById("addresses-container");
+      container.innerHTML = ""; // Kosongkan kontainer sebelum menambahkan elemen
+
+      let defaultAddress = null;
+
+      addresses.forEach((address, index) => {
+        console.log(`Rendering address: ${address.id_address}`); // Debug: Cek setiap alamat yang sedang diproses
+
+        // Buat elemen HTML untuk setiap alamat
+        const addressDiv = document.createElement("div");
+        addressDiv.className =
+          "w-full px-4 py-3 rounded-lg ring-2 ring-gray-200 flex items-start space-x-4";
+
+        addressDiv.innerHTML = `
+          <input
+            id="default-radio-${address.id_address}"
+            type="radio"
+            value="${address.id_address}"
+            name="default-radio"
+            data-modal-hide="authentication-modal"
+            class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
+            ${index === 0 ? "checked" : ""}
+          />
+          <div>
+            <p class="informasi text-md font-semibold text-gray-800">
+              ${address.name} | ${address.phone}
+            </p>
+            <p class="lokasi text-sm text-gray-600">
+              ${address.address}, ${address.kecamatan}, ${address.kelurahan}, ${address.kota}, ${address.provinsi}, ${address.kode_pos}
+            </p>
+          </div>
+        `;
+
+        container.appendChild(addressDiv);
+
+        // Set default data untuk elemen pertama
+        if (index === 0) {
+          defaultAddress = address;
+        }
+      });
+
+      // Set default nama dan alamat di luar loop
+      if (defaultAddress) {
+        document.getElementById("nama").textContent = defaultAddress.name;
+        document.getElementById("alamat").textContent = `${defaultAddress.address}, ${defaultAddress.kecamatan}, ${defaultAddress.kelurahan}, ${defaultAddress.kota}, ${defaultAddress.provinsi}, ${defaultAddress.kode_pos}`;
+      }
+
+      // Menambahkan event listener untuk radio buttons
+      const radioButtons = document.querySelectorAll("input[name='default-radio']");
+      radioButtons.forEach((radio) => {
+        radio.addEventListener("change", (event) => {
+          console.log("Radio button changed:", event.target); // Debug: Cek event ketika radio button berubah
+
+          const selectedAddressId = event.target.value;
+          console.log("Selected address ID:", selectedAddressId); // Debug: Cek ID alamat yang dipilih
+
+          const selectedAddress = addresses.find(
+            (address) => address.id_address === selectedAddressId
+          );
+
+          if (selectedAddress) {
+            console.log("Selected address:", selectedAddress); // Debug: Cek alamat yang dipilih
+
+            // Update nama dan alamat sesuai pilihan
+            document.getElementById("nama").textContent = selectedAddress.name;
+            document.getElementById("alamat").textContent = `${selectedAddress.address}, ${selectedAddress.kecamatan}, ${selectedAddress.kelurahan}, ${selectedAddress.kota}, ${selectedAddress.provinsi}, ${selectedAddress.kode_pos}`;
+          }
+        });
+      });
+    } catch (error) {
+      console.error("Failed to fetch addresses: ", error);
+    }
+  };
+
+  // Panggil fungsi untuk memuat data alamat
+  fetchAddresses();
+
   </script>
 </html>
