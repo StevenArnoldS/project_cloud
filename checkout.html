@@ -126,25 +126,21 @@ input[type=number]::-webkit-outer-spin-button {
           class="flex items-center space-x-5 md:space-x-10 rtl:space-x-reverse"
         >
           <!-- Favorite Icon -->
-          <a href="favorite.html">
-            <button
-              type="button"
-              class="text-gray-400 hover:text-white focus:outline-none"
-              aria-label="View favorite"
-            >
-              <i class="fa-solid fa-heart text-xl"></i>
-            </button>
-          </a>
-            <!-- Shopping Cart Icon -->
-          <a href="cart.html">
-            <button
-              type="button"
-              class="text-gray-400 hover:text-white focus:outline-none"
-              aria-label="View cart"
-            >
-              <i class="fas fa-shopping-cart text-xl"></i>
-            </button>
-          </a>
+          <button
+            type="button"
+            class="text-gray-400 hover:text-white focus:outline-none"
+            aria-label="View favorite"
+          >
+            <i class="fa-solid fa-heart text-xl"></i>
+          </button>
+          <!-- Shopping Cart Icon -->
+          <button
+            type="button"
+            class="text-gray-400 hover:text-white focus:outline-none"
+            aria-label="View cart"
+          >
+            <i class="fas fa-shopping-cart text-xl"></i>
+          </button>
 
           <!-- User Profile Icon and Dropdown Menu -->
           <button
@@ -198,7 +194,7 @@ input[type=number]::-webkit-outer-spin-button {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="logout.html"
                   class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
                   >Sign out</a
                 >
@@ -606,7 +602,7 @@ input[type=number]::-webkit-outer-spin-button {
               </div>
 
               <a
-                href="checkout.html"
+              id="bayar"
                 class="flex w-full items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300"
                 >Bayar</a
               >
@@ -617,11 +613,67 @@ input[type=number]::-webkit-outer-spin-button {
     </div>
   </body>
   <script>
+    window.onload = function () {
+        const idUser = sessionStorage.getItem("id_user");
+
+        if (!idUser) {
+          // Jika tidak ada id_user, tampilkan alert dan arahkan ke login.html
+          alert("Anda harus login terlebih dahulu.");
+          window.location.href = "login.html";
+        }
+      };
     let total_harga = 0;
-    var tmpTagihan = 0;
+var tmpAlamat = "";
+var tmpName = "";
+var tmpPhone = "";
+var tmpTagihan = 0;
+var tmpMethod = "";
+var tmpPengiriman = "";
+const idUser = sessionStorage.getItem("id_user");
+
+async function checkStock() {
+  try {
+    const url = new URL("https://7jno0aeih3.execute-api.us-east-1.amazonaws.com/default/check_stock"); // Ganti dengan URL Lambda
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+    const qty = params.get("qty");
+
+    if (name && qty) {
+      url.searchParams.append("name", name);
+      url.searchParams.append("qty", qty);
+    }
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (!data.success) {
+      Swal.fire({
+        title: "Failed",
+        text: data.message,
+        icon: "error",
+        confirmButtonText: "OK",
+        buttonsStyling: false,
+        customClass: {
+          confirmButton: "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-800",
+        },
+      }).then(() => {
+        window.location.href = "index.html";
+      });
+    } else {
+      // Jika sukses, tidak perlu alert apapun, bisa ditambahkan logic lain
+      console.log(data.message);  // Optional, jika perlu log
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Terjadi kesalahan saat memeriksa stok.");
+  }
+}
+
+checkStock();
 
 // API Fetch and Rendering
 document.addEventListener("DOMContentLoaded", function () {
+
   const total_harga_text = document.querySelector(".total-harga");
 
   const params = new URLSearchParams(window.location.search);
@@ -640,7 +692,7 @@ document.addEventListener("DOMContentLoaded", function () {
   async function fetchData() {
     try {
       let url =
-        "https://2y33ouer8f.execute-api.us-east-1.amazonaws.com/default/get_checkout";
+        `https://2y33ouer8f.execute-api.us-east-1.amazonaws.com/default/get_checkout?id_user=${encodeURIComponent(idUser)}`;
       if (name && qty) {
         url += `?name=${encodeURIComponent(name)}&qty=${encodeURIComponent(
           qty
@@ -762,6 +814,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ekspedisiDropdown.value = "reguler";
   ongkirDetail.textContent =
     "Rp " + ekspedisiData["reguler"].ongkir.toLocaleString("id-ID");
+    tmpPengiriman = "reguler";
   updateTotalTagihan();
 });
 
@@ -770,6 +823,7 @@ ekspedisiDropdown.addEventListener("change", () => {
   if (selectedValue && ekspedisiData[selectedValue]) {
     ongkirDetail.textContent =
       "Rp " + ekspedisiData[selectedValue].ongkir.toLocaleString("id-ID");
+    tmpPengiriman = selectedValue;
     updateTotalTagihan();
   }
 });
@@ -801,8 +855,10 @@ ekspedisiDropdown.addEventListener("change", () => {
         pembayaranDetail.classList.remove("hidden");
         pembayaranName.textContent = pembayaranData[selectedValue].name;
         pembayaranInfo.textContent = pembayaranData[selectedValue].info;
+        tmpMethod = selectedValue;
       } else {
         pembayaranDetail.classList.add("hidden");
+        tmpMethod = "";
       }
     });
     document.addEventListener("DOMContentLoaded", () => {
@@ -864,7 +920,8 @@ ekspedisiDropdown.addEventListener("change", () => {
           kecamatan
         )}&kota=${encodeURIComponent(kota)}&provinsi=${encodeURIComponent(
           provinsi
-        )}&kode_pos=${encodeURIComponent(kodePos)}`,
+        )}&kode_pos=${encodeURIComponent(kodePos)}
+        &id_user=${encodeURIComponent(idUser)}`,
         { method: "GET" }
       );
 
@@ -925,7 +982,7 @@ ekspedisiDropdown.addEventListener("change", () => {
   const fetchAddresses = async () => {
     try {
       const response = await fetch(
-        "https://ewml8foh5d.execute-api.us-east-1.amazonaws.com/default/get_address"
+        `https://ewml8foh5d.execute-api.us-east-1.amazonaws.com/default/get_address?id_user=${encodeURIComponent(idUser)}`
       );
       const addresses = await response.json();
 
@@ -979,8 +1036,11 @@ ekspedisiDropdown.addEventListener("change", () => {
 
       // Set default nama dan alamat di luar loop
       if (defaultAddress) {
-        document.getElementById("nama").textContent = defaultAddress.name;
+        document.getElementById("nama").textContent = `${defaultAddress.name} | ${defaultAddress.phone}`;
         document.getElementById("alamat").textContent = `${defaultAddress.address}, ${defaultAddress.kecamatan}, ${defaultAddress.kelurahan}, ${defaultAddress.kota}, ${defaultAddress.provinsi}, ${defaultAddress.kode_pos}`;
+        tmpName = defaultAddress.name;
+        tmpPhone = defaultAddress.name;
+        tmpAlamat = `${defaultAddress.address}, ${defaultAddress.kecamatan}, ${defaultAddress.kelurahan}, ${defaultAddress.kota}, ${defaultAddress.provinsi}, ${defaultAddress.kode_pos}`;
       }
 
       // Menambahkan event listener untuk radio buttons
@@ -1000,8 +1060,11 @@ ekspedisiDropdown.addEventListener("change", () => {
             console.log("Selected address:", selectedAddress); // Debug: Cek alamat yang dipilih
 
             // Update nama dan alamat sesuai pilihan
-            document.getElementById("nama").textContent = selectedAddress.name;
+            document.getElementById("nama").textContent = `${selectedAddress.name} | ${selectedAddress.phone}`;
             document.getElementById("alamat").textContent = `${selectedAddress.address}, ${selectedAddress.kecamatan}, ${selectedAddress.kelurahan}, ${selectedAddress.kota}, ${selectedAddress.provinsi}, ${selectedAddress.kode_pos}`;
+            tmpName = selectedAddress.name;
+            tmpPhone = selectedAddress.name;
+            tmpAlamat = `${selectedAddress.address}, ${selectedAddress.kecamatan}, ${selectedAddress.kelurahan}, ${selectedAddress.kota}, ${selectedAddress.provinsi}, ${selectedAddress.kode_pos}`;
           }
         });
       });
@@ -1012,6 +1075,114 @@ ekspedisiDropdown.addEventListener("change", () => {
 
   // Panggil fungsi untuk memuat data alamat
   fetchAddresses();
+  const bayarButton = document.getElementById("bayar");
+  const params = new URLSearchParams(window.location.search);
+const name = params.get("name");
+const qty = params.get("qty");
+
+bayarButton.addEventListener("click", async (event) => {
+  event.preventDefault();
+
+  console.log("Debugging tmp values:");
+  console.log({ tmpAlamat, tmpName, tmpPhone, tmpPengiriman, tmpMethod, tmpTagihan });
+
+  if (!tmpAlamat || !tmpName || !tmpPhone || !tmpPengiriman || !tmpTagihan) {
+    Swal.fire({
+      title: "Failed",
+      text:"Invalid address.",
+      icon: "error",
+      confirmButtonText: "OK",
+      buttonsStyling: false,
+      customClass: {
+        confirmButton: "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-800",
+      },
+    });
+    return;
+  }
+   if (!tmpMethod) {
+    Swal.fire({
+      title: "Failed",
+      text:"Invalid payment method.",
+      icon: "error",
+      confirmButtonText: "OK",
+      buttonsStyling: false,
+      customClass: {
+        confirmButton: "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-800",
+      },
+    });
+    return;
+   }
+
+  const loader = document.getElementById("fullscreen-loader");
+  loader.classList.remove("hidden");
+  document.body.classList.add("no-scroll");
+
+  try {
+    const url = new URL(`https://zc33bmvgse.execute-api.us-east-1.amazonaws.com/default/add_transaction?id_user=${encodeURIComponent(idUser)}`);
+
+    // Tambahkan parameter transaksi
+    url.searchParams.append("tmpAlamat", tmpAlamat);
+    url.searchParams.append("tmpName", tmpName);
+    url.searchParams.append("tmpPhone", tmpPhone);
+    url.searchParams.append("tmpPengiriman", tmpPengiriman);
+    url.searchParams.append("tmpMethod", tmpMethod);
+    url.searchParams.append("tmpTagihan", tmpTagihan);
+
+    // Tambahkan parameter produk jika ada
+    if (name && qty) {
+      url.searchParams.append("name", name);
+      url.searchParams.append("qty", qty);
+    }
+
+    const response = await fetch(url, { method: "GET" });
+    console.log("Response status:", response.status);
+
+    const result = await response.json();
+    console.log("API Response:", result);
+
+    if (result.success) {
+      Swal.fire({
+        title: "Success!",
+        text: "Transaksi berhasil!",
+        icon: "success",
+        confirmButtonText: "OK",
+        buttonsStyling: false,
+        customClass: {
+          confirmButton: "bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-800",
+        },
+      }).then(() => {
+        window.location.href = "index.html";
+      });
+    } else {
+      Swal.fire({
+        title: "Failed",
+        text: result.message,
+        icon: "error",
+        confirmButtonText: "OK",
+        buttonsStyling: false,
+        customClass: {
+          confirmButton: "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-800",
+        },
+      });
+    }
+  } catch (error) {
+    Swal.fire({
+      title: "Failed",
+      text: "Terjadi kesalahan saat menyimpan transaksi.",
+      icon: "error",
+      confirmButtonText: "OK",
+      buttonsStyling: false,
+      customClass: {
+        confirmButton: "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-800",
+      },
+    });
+  } finally {
+    loader.classList.add("hidden");
+    document.body.classList.remove("no-scroll");
+  }
+});
+
+
 
   </script>
 </html>

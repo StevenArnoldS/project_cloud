@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <style>
+      input::placeholder {
+        color: #e8eae7 !important;
+      }
+      ::-ms-input-placeholder {
+        color: #e8eae7 !important;
+      }
+      input {
+        background-color: #2a2829 !important;
+      }
+      button {
+        background-color: #2a2829 !important;
+        color: #e8eae7 !important;
+      }
+      .fullscreen-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.7); /* Hitam dengan transparansi */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Pastikan loader berada di atas semua elemen */
+      }
+
+      .loader {
+        width: 50px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(
+              farthest-side,
+              rgba(255, 255, 255, 0.7) 94%,
+              transparent
+            )
+            top/8px 8px no-repeat,
+          conic-gradient(transparent 30%, rgba(255, 255, 255, 0.9));
+        -webkit-mask: radial-gradient(
+          farthest-side,
+          transparent calc(100% - 8px),
+          #000 0
+        );
+        animation: l13 1s infinite linear;
+      }
+
+      @keyframes l13 {
+        100% {
+          transform: rotate(1turn);
+        }
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/password-hash/1.0.8/password-hash.min.js"></script>
+  </head>
+  <body>
+    <div id="fullscreen-loader" class="fullscreen-loader hidden">
+      <div class="loader"></div>
+    </div>
+    <section>
+      <div
+        class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
+      >
+        <div
+          class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 border"
+        >
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1
+              class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl"
+            >
+              Sign Up a new account
+            </h1>
+            <form class="space-y-4 md:space-y-6" action="#">
+              <div>
+                <label for="email" class="block mb-2 text-sm font-medium"
+                  >Full Name</label
+                >
+                <input
+                  type="text"
+                  name="fullName"
+                  class="bg-gray-50 border border-gray-300 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Full Name"
+                  required
+                />
+              </div>
+              <div>
+                <label for="email" class="block mb-2 text-sm font-medium"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  name="email"
+                  class="bg-gray-50 border border-gray-300 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="name@company.com"
+                  required
+                />
+              </div>
+              <div class="grid grid-cols-2 gap-6">
+                <div>
+                  <label for="email" class="block mb-2 text-sm font-medium"
+                    >Phone Number</label
+                  >
+                  <input
+                    type="text"
+                    name="phone"
+                    class="bg-gray-50 border border-gray-300 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="081219915554"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="password"
+                    class="block mb-2 text-sm font-medium text-gray-900"
+                    >Password</label
+                  >
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="••••••••"
+                    class="mb-3 bg-gray-50 border border-gray-300 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+                    required
+                  />
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="mb-3 w-full bg-gray-700 text-gray-500 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center focus:ring-primary-800"
+              >
+                Sign Up
+              </button>
+              <p class="text-sm font-light">
+                Have an account?
+                <a href="login.html" class="font-medium hover:underline"
+                  >Sign In</a
+                >
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <script>
+      const loader = document.getElementById("fullscreen-loader");
+
+      document.querySelector("form").addEventListener("submit", async (e) => {
+        e.preventDefault(); // Mencegah reload halaman
+
+        // Ambil data input dari form
+        const fullName = document.querySelector('input[name="fullName"]').value;
+        const email = document.querySelector('input[name="email"]').value;
+        const phone = document.querySelector('input[name="phone"]').value;
+        const password = document.querySelector('input[name="password"]').value;
+
+        // URL API Lambda dengan query string
+        const apiUrl = `https://e1ht4c59p4.execute-api.us-east-1.amazonaws.com/default/add_user?fullName=${encodeURIComponent(
+          fullName
+        )}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(
+          phone
+        )}&password=${encodeURIComponent(password)}`;
+        loader.classList.remove("hidden");
+        document.body.classList.add("no-scroll");
+
+        try {
+          // Kirim permintaan ke Lambda menggunakan GET
+          const response = await fetch(apiUrl, {
+            method: "GET",
+          });
+
+          // Cek respons dari Lambda
+          const result = await response.json();
+          if (result.success) {
+            Swal.fire({
+              title: "Success!",
+              text: "Sign up success!",
+              icon: "success",
+              confirmButtonText: "OK",
+              buttonsStyling: false,
+              customClass: {
+                confirmButton:
+                  "bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-800",
+              },
+            }).then(() => {
+              window.location.href = "login.html";
+            });
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: result.message,
+              icon: "error",
+              confirmButtonText: "OK",
+              buttonsStyling: false,
+              customClass: {
+                confirmButton:
+                  "bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-800",
+              },
+            });
+          }
+        } catch (error) {
+          Swal.fire({
+            title: "Error!",
+            text: "Failed to connect to the server.",
+            icon: "error",
+            confirmButtonText: "OK",
+            buttonsStyling: false,
+            customClass: {
+              confirmButton:
+                "bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-800",
+            },
+          });
+        } finally {
+          // Sembunyikan loader dan aktifkan kembali scroll
+          loader.classList.add("hidden");
+          document.body.classList.remove("no-scroll");
+        }
+      });
+    </script>
+  </body>
+</html>
