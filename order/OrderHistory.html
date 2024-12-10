@@ -93,7 +93,7 @@
 
         // Use your endpoint URL
         const response = await fetch(
-          `https://2wwq09t8s6.execute-api.us-east-1.amazonaws.com/default/OrderHistory?${queryParams}`
+          `https://2wwq09t8s6.execute-api.us-east-1.amazonaws.com/default/OrderHistory?id_user=${encodeURIComponent(idUser)}`
         );
 
         if (!response.ok) {
