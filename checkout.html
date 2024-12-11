@@ -126,25 +126,21 @@ input[type=number]::-webkit-outer-spin-button {
           class="flex items-center space-x-5 md:space-x-10 rtl:space-x-reverse"
         >
           <!-- Favorite Icon -->
-          <a href="favorite.html">
-            <button
-              type="button"
-              class="text-gray-400 hover:text-white focus:outline-none"
-              aria-label="View favorite"
-            >
-              <i class="fa-solid fa-heart text-xl"></i>
-            </button>
-          </a>
+          <button
+            type="button"
+            class="text-gray-400 hover:text-white focus:outline-none"
+            aria-label="View favorite"
+          >
+            <i class="fa-solid fa-heart text-xl"></i>
+          </button>
           <!-- Shopping Cart Icon -->
-          <a href="cart.html">
-            <button
-              type="button"
-              class="text-gray-400 hover:text-white focus:outline-none"
-              aria-label="View cart"
-            >
-              <i class="fas fa-shopping-cart text-xl"></i>
-            </button>
-          </a>
+          <button
+            type="button"
+            class="text-gray-400 hover:text-white focus:outline-none"
+            aria-label="View cart"
+          >
+            <i class="fas fa-shopping-cart text-xl"></i>
+          </button>
 
           <!-- User Profile Icon and Dropdown Menu -->
           <button
@@ -169,37 +165,23 @@ input[type=number]::-webkit-outer-spin-button {
             id="user-dropdown"
           >
             <div class="px-4 py-3">
-              <span class="block text-sm text-white">Bonnie Green</span>
-              <span class="block text-sm truncate text-gray-400"
-                >name@flowbite.com</span
+              <span class="name block text-sm text-white"></span>
+              <span class="email block text-sm truncate text-gray-400"
+                ></span
               >
             </div>
             <ul class="py-2" aria-labelledby="user-menu-button">
               <li>
                 <a
-                  href="#"
+                  href="OrderHistory.html"
                   class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
-                  >Dashboard</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
-                  >Settings</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
-                  >Earnings</a
+                  >Order History</a
                 >
               </li>
               <li>
                 <a
                   href="logout.html"
-                  class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
+                  class="block px-4 py-2 text-sm hover:bg-gray-600 font-bold text-red-500"
                   >Sign out</a
                 >
               </li>
@@ -618,14 +600,18 @@ input[type=number]::-webkit-outer-spin-button {
   </body>
   <script>
     window.onload = function () {
-        const idUser = sessionStorage.getItem("id_user");
+      const idUser = sessionStorage.getItem("id_user");
+      const name = sessionStorage.getItem("name");
+      const email = sessionStorage.getItem("email");
 
-        if (!idUser) {
-          // Jika tidak ada id_user, tampilkan alert dan arahkan ke login.html
-          alert("Anda harus login terlebih dahulu.");
-          window.location.href = "login.html";
-        }
-      };
+      if (!idUser) {
+        // Jika tidak ada id_user, tampilkan alert dan arahkan ke login.html
+        alert("Anda harus login terlebih dahulu.");
+        window.location.href = "login.html";
+      }
+      document.querySelector(".name").innerHTML=name;
+      document.querySelector(".email").innerHTML=email;
+    };
     let total_harga = 0;
 var tmpAlamat = "";
 var tmpName = "";
@@ -669,7 +655,6 @@ async function checkStock() {
     }
   } catch (error) {
     console.error("Error:", error);
-    alert("Terjadi kesalahan saat memeriksa stok.");
   }
 }
 
@@ -696,11 +681,13 @@ document.addEventListener("DOMContentLoaded", function () {
   async function fetchData() {
     try {
       let url =
-        `https://2y33ouer8f.execute-api.us-east-1.amazonaws.com/default/get_checkout?id_user=${encodeURIComponent(idUser)}`;
+        `https://2y33ouer8f.execute-api.us-east-1.amazonaws.com/default/get_checkout`;
       if (name && qty) {
         url += `?name=${encodeURIComponent(name)}&qty=${encodeURIComponent(
           qty
         )}`;
+      } else {
+        url += `?id_user=${encodeURIComponent(idUser)}`;
       }
 
       const response = await fetch(url);
@@ -1043,7 +1030,7 @@ ekspedisiDropdown.addEventListener("change", () => {
         document.getElementById("nama").textContent = `${defaultAddress.name} | ${defaultAddress.phone}`;
         document.getElementById("alamat").textContent = `${defaultAddress.address}, ${defaultAddress.kecamatan}, ${defaultAddress.kelurahan}, ${defaultAddress.kota}, ${defaultAddress.provinsi}, ${defaultAddress.kode_pos}`;
         tmpName = defaultAddress.name;
-        tmpPhone = defaultAddress.name;
+        tmpPhone = defaultAddress.phone;
         tmpAlamat = `${defaultAddress.address}, ${defaultAddress.kecamatan}, ${defaultAddress.kelurahan}, ${defaultAddress.kota}, ${defaultAddress.provinsi}, ${defaultAddress.kode_pos}`;
       }
 
@@ -1067,7 +1054,7 @@ ekspedisiDropdown.addEventListener("change", () => {
             document.getElementById("nama").textContent = `${selectedAddress.name} | ${selectedAddress.phone}`;
             document.getElementById("alamat").textContent = `${selectedAddress.address}, ${selectedAddress.kecamatan}, ${selectedAddress.kelurahan}, ${selectedAddress.kota}, ${selectedAddress.provinsi}, ${selectedAddress.kode_pos}`;
             tmpName = selectedAddress.name;
-            tmpPhone = selectedAddress.name;
+            tmpPhone = selectedAddress.phone;
             tmpAlamat = `${selectedAddress.address}, ${selectedAddress.kecamatan}, ${selectedAddress.kelurahan}, ${selectedAddress.kota}, ${selectedAddress.provinsi}, ${selectedAddress.kode_pos}`;
           }
         });

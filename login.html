@@ -165,6 +165,8 @@
           if (result.success) {
             // Simpan id_user ke sessionStorage
             sessionStorage.setItem("id_user", result.id_user);
+            sessionStorage.setItem("name", result.name);
+            sessionStorage.setItem("email", result.email);
             Swal.fire({
               title: "Success!",
               text: "Sign in success!",
