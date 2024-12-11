@@ -160,7 +160,7 @@
     <div class="cart px-28 py-8 bg-gray-50">
       <p class="text-3xl font-bold">Keranjang</p>
       <div class="flex flex-row">
-        <div class="products"></div>
+        <div id="product-container" class="products"></div>
 
         <!-- Order Summary -->
         <div class="mx-auto pt-5 pl-8 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
@@ -182,6 +182,22 @@
     </div>
   </body>
   <script>
+    document
+        .getElementById("search-navbar")
+        .addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            const searchInput = document
+              .getElementById("search-navbar")
+              .value.trim();
+
+            // Jika input pencarian tidak kosong, kita akan mengirimkan query ke items.html
+            if (searchInput) {
+              window.location.href = `items.html?search=${encodeURIComponent(
+                searchInput
+              )}`;
+            }
+          }
+        });
     window.onload = async function () {
       const idUser = sessionStorage.getItem("id_user");
 
@@ -215,7 +231,7 @@
                   <button class="increment-btn bg-gray-200 px-3 py-1 rounded-r-md hover:bg-gray-300 text-gray-900">+</button>
                 </div>
                 <div class="col-span-2 text-end text-base font-bold text-gray-900 product-price">
-                  Rp ${Number(product.item_price).toLocaleString()}
+                  @ Rp ${Number(product.item_price).toLocaleString()}
                 </div>
               </div>
             `;

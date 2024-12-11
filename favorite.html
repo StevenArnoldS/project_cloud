@@ -202,6 +202,22 @@
       </a>
     </div>
     <script>
+      document
+        .getElementById("search-navbar")
+        .addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            const searchInput = document
+              .getElementById("search-navbar")
+              .value.trim();
+
+            // Jika input pencarian tidak kosong, kita akan mengirimkan query ke items.html
+            if (searchInput) {
+              window.location.href = `items.html?search=${encodeURIComponent(
+                searchInput
+              )}`;
+            }
+          }
+        });
       // Ambil elemen ikon hati
       const toggleHeart = document.getElementById("toggleHeart");
 
