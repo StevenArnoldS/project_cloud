@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+
+<body>
+    <nav class="bg-gray-900 shadow">
+        <div class="max-w-screen-xl flex items-center justify-between mx-auto p-5">
+            <a href="index.html" class="hidden md:flex items-center space-x-3">
+                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Logo">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">E-commerce</span>
+            </a>
+        </div>
+    </nav>
+
+    <section class="py-24 relative">
+        <div class="w-full max-w-7xl mx-auto px-4 md:px-8">
+            <div id="order-details-container" class="text-center">
+                <!-- Order details will load dynamically here -->
+                <p class="text-gray-600">Loading order details...</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const idUser = sessionStorage.getItem("id_user");
+
+            if (!idUser) {
+                alert("Anda harus login terlebih dahulu");
+                window.location.href = "../login.html";
+                return;
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const transactionId = urlParams.get("id_transaction");
+
+            if (!transactionId) {
+                document.getElementById("order-details-container").innerHTML = `<p class="text-gray-600">No transaction ID provided. Please check the URL.</p>`;
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://34wfljc5hk.execute-api.us-east-1.amazonaws.com/default/DetailOrder?id_user=${encodeURIComponent(idUser)}&id_transaction=${encodeURIComponent(transactionId)}`);
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch order details");
+                }
+
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.message || "Unknown error");
+                }
+
+                renderOrderDetails(result.data);
+            } catch (error) {
+                document.getElementById("order-details-container").innerHTML = `<p class="text-red-500">Error: ${error.message}</p>`;
+            }
+        });
+
+        function renderOrderDetails(orderData) {
+            const container = document.getElementById("order-details-container");
+
+            const itemsHTML = Array.isArray(orderData.items) && orderData.items.length
+                ? orderData.items
+                    .map(
+                        (item) => `
+                    <tr>
+                        <td class="border px-4 py-2 text-left">${item.product_name}</td>
+                        <td class="border px-4 py-2 text-center">${item.qty}</td>
+                        <td class="border px-4 py-2 text-right">${new Intl.NumberFormat('id-ID', {
+                            style: 'currency',
+                            currency: 'IDR',
+                        }).format(item.item_price)}</td>
+                    </tr>
+                `
+                    )
+                    .join("")
+                : `<tr><td colspan="3" class="text-center py-4">No items found</td></tr>`;
+
+            const transaction = orderData.transaction;
+
+            const orderHTML = `
+        <div class="bg-white shadow rounded-lg p-6">
+            <h2 class="text-2xl font-bold mb-4">Order Details</h2>
+            <p><strong>Transaction ID:</strong> ${transaction.id_transaction}</p>
+            <p><strong>Customer Name:</strong> ${transaction.customer_name}</p>
+            <p><strong>Phone:</strong> ${transaction.phone}</p>
+            <p><strong>Address:</strong> ${transaction.address}</p>
+            <p><strong>Order Date:</strong> ${new Date(transaction.tanggal).toLocaleDateString()}</p>
+            <p><strong>Total Price:</strong> ${new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+            }).format(transaction.total)}</p>
+            <p><strong>Shipping Method:</strong> ${transaction.pengiriman || "N/A"}</p>
+            <p><strong>Payment Method:</strong> ${transaction.method}</p>
+
+            <h3 class="text-xl font-bold mt-6 mb-3">Items</h3>
+            <table class="w-full border-collapse border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="border px-4 py-2 text-left">Product Name</th>
+                        <th class="border px-4 py-2 text-center">Quantity</th>
+                        <th class="border px-4 py-2 text-right">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${itemsHTML}
+                </tbody>
+            </table>
+        </div>
+    `;
+
+            container.innerHTML = orderHTML;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</body>
+
+</html>
