@@ -74,21 +74,21 @@
           class="flex items-center space-x-5 md:space-x-10 rtl:space-x-reverse"
         >
           <!-- Favorite Icon -->
-          <button
-            type="button"
+          <a
+            href="favorite.html"
             class="text-gray-400 hover:text-white focus:outline-none"
             aria-label="View favorite"
           >
             <i class="fa-solid fa-heart text-xl"></i>
-          </button>
+          </a>
           <!-- Shopping Cart Icon -->
-          <button
-            type="button"
+          <a
+            href="cart.html"
             class="text-gray-400 hover:text-white focus:outline-none"
             aria-label="View cart"
           >
             <i class="fas fa-shopping-cart text-xl"></i>
-          </button>
+          </a>
 
           <!-- User Profile Icon and Dropdown Menu -->
           <button
@@ -114,9 +114,7 @@
           >
             <div class="px-4 py-3">
               <span class="name block text-sm text-white"></span>
-              <span class="email block text-sm truncate text-gray-400"
-                ></span
-              >
+              <span class="email block text-sm truncate text-gray-400"></span>
             </div>
             <ul class="py-2" aria-labelledby="user-menu-button">
               <li>
@@ -443,8 +441,8 @@
           alert("Anda harus login terlebih dahulu.");
           window.location.href = "login.html";
         }
-        document.querySelector(".name").innerHTML=name;
-        document.querySelector(".email").innerHTML=email;
+        document.querySelector(".name").innerHTML = name;
+        document.querySelector(".email").innerHTML = email;
       };
       const apiUrl =
         "https://5wbr7sngsd.execute-api.us-east-1.amazonaws.com/default/rdslambda"; // URL Lambda Anda
