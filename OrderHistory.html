@@ -39,13 +39,13 @@
       <!-- Right Side: Cart and User Profile -->
       <div class="flex items-center space-x-5 md:space-x-10 rtl:space-x-reverse">
         <!-- Favorite Icon -->
-        <button type="button" class="text-gray-400 hover:text-white focus:outline-none" aria-label="View favorite">
+        <a href="favorite.html" class="text-gray-400 hover:text-white focus:outline-none" aria-label="View favorite">
           <i class="fa-solid fa-heart text-xl"></i>
-        </button>
+        </a>
         <!-- Shopping Cart Icon -->
-        <button type="button" class="text-gray-400 hover:text-white focus:outline-none" aria-label="View cart">
+        <a href="cart.html" class="text-gray-400 hover:text-white focus:outline-none" aria-label="View cart">
           <i class="fas fa-shopping-cart text-xl"></i>
-        </button>
+        </a>
 
         <!-- User Profile Icon and Dropdown Menu -->
         <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-600"
@@ -61,22 +61,17 @@
         <div class="z-50 hidden my-4 text-base list-none divide-y rounded-lg shadow bg-gray-700 divide-gray-600"
           id="user-dropdown">
           <div class="px-4 py-3">
-            <span class="block text-sm text-white">Bonnie Green</span>
-            <span class="block text-sm truncate text-gray-400">name@flowbite.com</span>
+            <span class="name block text-sm text-white"></span>
+            <span class="email block text-sm truncate text-gray-400"></span>
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
             <li>
-              <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Dashboard</a>
+              <a href="OrderHistory.html"
+                class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Order History</a>
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Settings</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Earnings</a>
-            </li>
-            <li>
-              <a href="logout.html"
-                class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Sign out</a>
+              <a href="logout.html" class="block px-4 py-2 text-sm hover:bg-gray-600 font-bold text-red-500">Sign
+                out</a>
             </li>
           </ul>
         </div>
@@ -87,18 +82,6 @@
   <!-- Main Content -->
   <div class="container mx-auto px-4 py-8">
     <h1 class="text-3xl font-bold mb-8">Order History</h1>
-
-    <!-- Filter Buttons -->
-    <div class="flex flex-wrap gap-4 mb-8">
-      <button onclick="fetchOrderHistory()"
-        class="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">All Orders</button>
-      <button onclick="fetchOrderHistory('Completed')"
-        class="px-6 py-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition">Completed</button>
-      <button onclick="fetchOrderHistory('Canceled')"
-        class="px-6 py-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition">Canceled</button>
-      <button onclick="fetchOrderHistory('On Delivery')"
-        class="px-6 py-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition">On Delivery</button>
-    </div>
 
     <!-- Loader -->
     <div id="loader" class="hidden text-center my-8">
@@ -115,13 +98,32 @@
   <!-- JavaScript -->
   <script>
     window.onload = function () {
-      const idUser = sessionStorage.getItem("id_user"); // Retrieve the logged-in user's ID
+      const idUser = sessionStorage.getItem("id_user");
+      const name = sessionStorage.getItem("name");
+      const email = sessionStorage.getItem("email");
 
       if (!idUser) {
-        alert("Anda harus login terlebih dahulu")
-        window.location.href = "../login.html";
+        // Jika tidak ada id_user, tampilkan alert dan arahkan ke login.html
+        alert("Anda harus login terlebih dahulu.");
+        window.location.href = "login.html";
       }
-    }
+      document.querySelector(".name").innerHTML = name;
+      document.querySelector(".email").innerHTML = email;
+    };
+    document.getElementById("search-navbar").addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        const searchInput = document
+          .getElementById("search-navbar")
+          .value.trim();
+
+        // Jika input pencarian tidak kosong, kita akan mengirimkan query ke items.html
+        if (searchInput) {
+          window.location.href = `items.html?search=${encodeURIComponent(
+            searchInput
+          )}`;
+        }
+      }
+    });
     const idUser = sessionStorage.getItem("id_user"); // Retrieve the logged-in user's ID
 
     async function fetchOrderHistory(method) {
@@ -168,8 +170,8 @@
         const container = document.getElementById("order-history-container");
         container.innerHTML = transactions
           .map(
-            (transaction) => 
-            `
+            (transaction) =>
+              `
             <a href="DetailOrder.html?id_transaction=${transaction.id_transaction}">
               <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col hover:shadow-xl transition">
                 <div class="flex justify-between items-start mb-4">
@@ -178,18 +180,18 @@
                         <p class="text-gray-500">${formatDate(transaction.tanggal)}</p>
                     </div>
                     <span class="px-3 py-1 ${transaction.method === "COD"
-                        ? "bg-yellow-100 text-yellow-600"
-                        : "bg-green-100 text-green-600"
-                      } rounded-full text-sm">${transaction.method}</span>
+                ? "bg-yellow-100 text-yellow-600"
+                : "bg-green-100 text-green-600"
+              } rounded-full text-sm">${transaction.method}</span>
                 </div>
                 <div class="mb-4 flex-grow">
                     <p class="text-2xl font-bold text-gray-800">${new Intl.NumberFormat(
-                        "id-ID",
-                        {
-                          style: "currency",
-                          currency: "IDR",
-                        }
-                      ).format(transaction.total)}</p>
+                "id-ID",
+                {
+                  style: "currency",
+                  currency: "IDR",
+                }
+              ).format(transaction.total)}</p>
                 </div>
                 <div class="mt-4">
                   <p class="text-gray-600"><strong>Name:</strong> ${transaction.name}</p>
@@ -216,7 +218,6 @@
     document.getElementById("filter-method").addEventListener("change", (e) => {
       fetchOrderHistory(e.target.value);
     });
-
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>

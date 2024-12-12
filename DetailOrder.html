@@ -12,10 +12,71 @@
 <body>
     <nav class="bg-gray-900 shadow">
         <div class="max-w-screen-xl flex items-center justify-between mx-auto p-5">
-            <a href="index.html" class="hidden md:flex items-center space-x-3">
-                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Logo">
+            <!-- Logo, displayed only on md and larger screens -->
+            <a href="index.html" class="hidden md:flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">E-commerce</span>
             </a>
+
+            <!-- Centered Full-width Search Bar -->
+            <div class="flex-1 flex justify-center pe-5">
+                <div class="relative w-full max-w-lg">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
+                        <span class="sr-only">Search icon</span>
+                    </div>
+                    <input type="text" id="search-navbar"
+                        class="block w-full p-2 ps-10 text-sm border rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
+                        placeholder="Search..." />
+                </div>
+            </div>
+
+            <!-- Right Side: Cart and User Profile -->
+            <div class="flex items-center space-x-5 md:space-x-10 rtl:space-x-reverse">
+                <!-- Favorite Icon -->
+                <a href="favorite.html" class="text-gray-400 hover:text-white focus:outline-none"
+                    aria-label="View favorite">
+                    <i class="fa-solid fa-heart text-xl"></i>
+                </a>
+                <!-- Shopping Cart Icon -->
+                <a href="cart.html" class="text-gray-400 hover:text-white focus:outline-none" aria-label="View cart">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                </a>
+
+                <!-- User Profile Icon and Dropdown Menu -->
+                <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-600"
+                    id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
+                    data-dropdown-placement="bottom">
+                    <span class="sr-only">Open user menu</span>
+                    <img class="w-8 h-8 rounded-full"
+                        src="https://static.vecteezy.com/system/resources/thumbnails/019/900/306/small_2x/happy-young-cute-illustration-face-profile-png.png"
+                        alt="user photo" />
+                </button>
+
+                <!-- Dropdown menu -->
+                <div class="z-50 hidden my-4 text-base list-none divide-y rounded-lg shadow bg-gray-700 divide-gray-600"
+                    id="user-dropdown">
+                    <div class="px-4 py-3">
+                        <span class="name block text-sm text-white"></span>
+                        <span class="email block text-sm truncate text-gray-400"></span>
+                    </div>
+                    <ul class="py-2" aria-labelledby="user-menu-button">
+                        <li>
+                            <a href="OrderHistory.html"
+                                class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Order
+                                History</a>
+                        </li>
+                        <li>
+                            <a href="logout.html"
+                                class="block px-4 py-2 text-sm hover:bg-gray-600 font-bold text-red-500">Sign out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -29,20 +90,45 @@
     </section>
 
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
+        window.onload = function () {
             const idUser = sessionStorage.getItem("id_user");
+            const name = sessionStorage.getItem("name");
+            const email = sessionStorage.getItem("email");
 
             if (!idUser) {
-                alert("Anda harus login terlebih dahulu");
-                window.location.href = "../login.html";
-                return;
+                // Jika tidak ada id_user, tampilkan alert dan arahkan ke login.html
+                alert("Anda harus login terlebih dahulu.");
+                window.location.href = "login.html";
             }
+            document.querySelector(".name").innerHTML = name;
+            document.querySelector(".email").innerHTML = email;
+        };
+        document.getElementById("search-navbar").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                const searchInput = document
+                    .getElementById("search-navbar")
+                    .value.trim();
+
+                // Jika input pencarian tidak kosong, kita akan mengirimkan query ke items.html
+                if (searchInput) {
+                    window.location.href = `items.html?search=${encodeURIComponent(
+                        searchInput
+                    )}`;
+                }
+            }
+        });
+        document.addEventListener('DOMContentLoaded', async () => {
+            const idUser = sessionStorage.getItem("id_user");
 
             const urlParams = new URLSearchParams(window.location.search);
             const transactionId = urlParams.get("id_transaction");
 
             if (!transactionId) {
-                document.getElementById("order-details-container").innerHTML = `<p class="text-gray-600">No transaction ID provided. Please check the URL.</p>`;
+                document.getElementById("order-details-container").innerHTML = `
+            <div class="bg-yellow-100 text-yellow-800 p-6 rounded-lg shadow-md">
+                <p class="text-lg font-semibold">No transaction ID provided.</p>
+                <p>Please check the URL and try again.</p>
+            </div>`;
                 return;
             }
 
@@ -61,21 +147,39 @@
 
                 renderOrderDetails(result.data);
             } catch (error) {
-                document.getElementById("order-details-container").innerHTML = `<p class="text-red-500">Error: ${error.message}</p>`;
+                document.getElementById("order-details-container").innerHTML = `
+            <div class="bg-red-100 text-red-800 p-6 rounded-lg shadow-md">
+                <p class="text-lg font-semibold">Error</p>
+                <p>${error.message}</p>
+            </div>`;
             }
         });
 
         function renderOrderDetails(orderData) {
+            function formatDate(dateString) {
+                try {
+                    // Create a date object from the string
+                    const date = new Date(dateString);
+                    // Format the date as DD/MM/YYYY
+                    const day = String(date.getUTCDate()).padStart(2, '0'); // Use getUTCDate to avoid time zone shifts
+                    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+                    const year = date.getUTCFullYear();
+                    return `${day}/${month}/${year}`;
+                } catch (error) {
+                    console.error("Error formatting date:", error);
+                    return dateString; // Fallback to the original string if parsing fails
+                }
+            }
             const container = document.getElementById("order-details-container");
 
             const itemsHTML = Array.isArray(orderData.items) && orderData.items.length
                 ? orderData.items
                     .map(
                         (item) => `
-                    <tr>
-                        <td class="border px-4 py-2 text-left">${item.product_name}</td>
-                        <td class="border px-4 py-2 text-center">${item.qty}</td>
-                        <td class="border px-4 py-2 text-right">${new Intl.NumberFormat('id-ID', {
+                    <tr class="border-b hover:bg-gray-100 transition-colors">
+                        <td class="px-4 py-3 text-left font-medium text-gray-700">${item.product_name}</td>
+                        <td class="px-4 py-3 text-center text-gray-600">${item.qty}</td>
+                        <td class="px-4 py-3 text-right font-medium text-gray-700">${new Intl.NumberFormat('id-ID', {
                             style: 'currency',
                             currency: 'IDR',
                         }).format(item.item_price)}</td>
@@ -83,35 +187,42 @@
                 `
                     )
                     .join("")
-                : `<tr><td colspan="3" class="text-center py-4">No items found</td></tr>`;
+                : `<tr><td colspan="3" class="text-center py-4 text-gray-500">No items found</td></tr>`;
 
             const transaction = orderData.transaction;
 
             const orderHTML = `
-        <div class="bg-white shadow rounded-lg p-6">
-            <h2 class="text-2xl font-bold mb-4">Order Details</h2>
-            <p><strong>Transaction ID:</strong> ${transaction.id_transaction}</p>
-            <p><strong>Customer Name:</strong> ${transaction.customer_name}</p>
-            <p><strong>Phone:</strong> ${transaction.phone}</p>
-            <p><strong>Address:</strong> ${transaction.address}</p>
-            <p><strong>Order Date:</strong> ${new Date(transaction.tanggal).toLocaleDateString()}</p>
-            <p><strong>Total Price:</strong> ${new Intl.NumberFormat('id-ID', {
+        <div class="bg-white shadow-lg rounded-lg p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Order Details</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <p><span class="font-semibold text-gray-700">Transaction ID:</span> ${transaction.id_transaction}</p>
+                    <p><span class="font-semibold text-gray-700">Customer Name:</span> ${transaction.customer_name}</p>
+                    <p><span class="font-semibold text-gray-700">Phone:</span> ${transaction.phone}</p>
+                    <p><span class="font-semibold text-gray-700">Address:</span> ${transaction.address}</p>
+                </div>
+                <div>
+                    <p><span class="font-semibold text-gray-700">Order Date:</span> ${formatDate(transaction.tanggal)}</p>
+                    <p><span class="font-semibold text-gray-700">Total Price:</span> ${new Intl.NumberFormat('id-ID', {
                 style: 'currency',
                 currency: 'IDR',
             }).format(transaction.total)}</p>
-            <p><strong>Shipping Method:</strong> ${transaction.pengiriman || "N/A"}</p>
-            <p><strong>Payment Method:</strong> ${transaction.method}</p>
+                    <p><span class="font-semibold text-gray-700">Shipping Method:</span> ${transaction.pengiriman || "N/A"}</p>
+                    <p><span class="font-semibold text-gray-700">Payment Method:</span> ${transaction.method}</p>
+                </div>
+            </div>
 
-            <h3 class="text-xl font-bold mt-6 mb-3">Items</h3>
-            <table class="w-full border-collapse border border-gray-300">
-                <thead>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Items</h3>
+            <table class="w-full border rounded-lg overflow-hidden">
+                <thead class="bg-gray-100">
                     <tr>
-                        <th class="border px-4 py-2 text-left">Product Name</th>
-                        <th class="border px-4 py-2 text-center">Quantity</th>
-                        <th class="border px-4 py-2 text-right">Price</th>
+                        <th class="px-4 py-3 text-left font-semibold text-gray-700">Product Name</th>
+                        <th class="px-4 py-3 text-center font-semibold text-gray-700">Quantity</th>
+                        <th class="px-4 py-3 text-right font-semibold text-gray-700">Price</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white">
                     ${itemsHTML}
                 </tbody>
             </table>
