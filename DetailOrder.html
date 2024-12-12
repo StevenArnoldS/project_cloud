@@ -88,7 +88,6 @@
             </div>
         </div>
     </section>
-
     <script>
         window.onload = function () {
             const idUser = sessionStorage.getItem("id_user");
@@ -96,27 +95,27 @@
             const email = sessionStorage.getItem("email");
 
             if (!idUser) {
-                // Jika tidak ada id_user, tampilkan alert dan arahkan ke login.html
+                // Redirect to login page if user is not logged in
                 alert("Anda harus login terlebih dahulu.");
                 window.location.href = "login.html";
             }
+
             document.querySelector(".name").innerHTML = name;
             document.querySelector(".email").innerHTML = email;
         };
+
         document.getElementById("search-navbar").addEventListener("keypress", (e) => {
             if (e.key === "Enter") {
                 const searchInput = document
                     .getElementById("search-navbar")
                     .value.trim();
 
-                // Jika input pencarian tidak kosong, kita akan mengirimkan query ke items.html
                 if (searchInput) {
-                    window.location.href = `items.html?search=${encodeURIComponent(
-                        searchInput
-                    )}`;
+                    window.location.href = `items.html?search=${encodeURIComponent(searchInput)}`;
                 }
             }
         });
+
         document.addEventListener('DOMContentLoaded', async () => {
             const idUser = sessionStorage.getItem("id_user");
 
@@ -124,11 +123,7 @@
             const transactionId = urlParams.get("id_transaction");
 
             if (!transactionId) {
-                document.getElementById("order-details-container").innerHTML = `
-            <div class="bg-yellow-100 text-yellow-800 p-6 rounded-lg shadow-md">
-                <p class="text-lg font-semibold">No transaction ID provided.</p>
-                <p>Please check the URL and try again.</p>
-            </div>`;
+                displayError("No transaction ID provided.", "Please check the URL and try again.");
                 return;
             }
 
@@ -147,47 +142,16 @@
 
                 renderOrderDetails(result.data);
             } catch (error) {
-                document.getElementById("order-details-container").innerHTML = `
-            <div class="bg-red-100 text-red-800 p-6 rounded-lg shadow-md">
-                <p class="text-lg font-semibold">Error</p>
-                <p>${error.message}</p>
-            </div>`;
+                displayError("Error", error.message);
             }
         });
 
         function renderOrderDetails(orderData) {
-            function formatDate(dateString) {
-                try {
-                    // Create a date object from the string
-                    const date = new Date(dateString);
-                    // Format the date as DD/MM/YYYY
-                    const day = String(date.getUTCDate()).padStart(2, '0'); // Use getUTCDate to avoid time zone shifts
-                    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-indexed
-                    const year = date.getUTCFullYear();
-                    return `${day}/${month}/${year}`;
-                } catch (error) {
-                    console.error("Error formatting date:", error);
-                    return dateString; // Fallback to the original string if parsing fails
-                }
-            }
             const container = document.getElementById("order-details-container");
 
             const itemsHTML = Array.isArray(orderData.items) && orderData.items.length
-                ? orderData.items
-                    .map(
-                        (item) => `
-                    <tr class="border-b hover:bg-gray-100 transition-colors">
-                        <td class="px-4 py-3 text-left font-medium text-gray-700">${item.product_name}</td>
-                        <td class="px-4 py-3 text-center text-gray-600">${item.qty}</td>
-                        <td class="px-4 py-3 text-right font-medium text-gray-700">${new Intl.NumberFormat('id-ID', {
-                            style: 'currency',
-                            currency: 'IDR',
-                        }).format(item.item_price)}</td>
-                    </tr>
-                `
-                    )
-                    .join("")
-                : `<tr><td colspan="3" class="text-center py-4 text-gray-500">No items found</td></tr>`;
+                ? orderData.items.map(createItemRow).join("")
+                : createEmptyRow();
 
             const transaction = orderData.transaction;
 
@@ -195,25 +159,20 @@
         <div class="bg-white shadow-lg rounded-lg p-8">
             <h2 class="text-3xl font-bold text-gray-800 mb-6">Order Details</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <div>
-                    <p><span class="font-semibold text-gray-700">Transaction ID:</span> ${transaction.id_transaction}</p>
-                    <p><span class="font-semibold text-gray-700">Customer Name:</span> ${transaction.customer_name}</p>
-                    <p><span class="font-semibold text-gray-700">Phone:</span> ${transaction.phone}</p>
-                    <p><span class="font-semibold text-gray-700">Address:</span> ${transaction.address}</p>
-                </div>
-                <div>
-                    <p><span class="font-semibold text-gray-700">Order Date:</span> ${formatDate(transaction.tanggal)}</p>
-                    <p><span class="font-semibold text-gray-700">Total Price:</span> ${new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR',
-            }).format(transaction.total)}</p>
-                    <p><span class="font-semibold text-gray-700">Shipping Method:</span> ${transaction.pengiriman || "N/A"}</p>
-                    <p><span class="font-semibold text-gray-700">Payment Method:</span> ${transaction.method}</p>
-                </div>
-            </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Transaction Details</h3>
+            <table class="w-full border rounded-lg overflow-hidden">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-4 py-3 text-center font-semibold text-gray-700">Field</th>
+                        <th class="px-4 py-3 text-center font-semibold text-gray-700">Details</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white">
+                    ${createTransactionRows(transaction)}
+                </tbody>
+            </table>
 
-            <h3 class="text-2xl font-bold text-gray-800 mb-4">Items</h3>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4 mt-8">Items</h3>
             <table class="w-full border rounded-lg overflow-hidden">
                 <thead class="bg-gray-100">
                     <tr>
@@ -231,6 +190,84 @@
 
             container.innerHTML = orderHTML;
         }
+
+        function createTransactionRows(transaction) {
+            return `
+        <tr class="border-b">
+            <td class="px-4 py-3 font-semibold text-gray-700">Transaction ID</td>
+            <td class="px-4 py-3">${transaction.id_transaction}</td>
+        </tr>
+        <tr class="border-b">
+            <td class="px-4 py-3 font-semibold text-gray-700">Customer Name</td>
+            <td class="px-4 py-3">${transaction.customer_name}</td>
+        </tr>
+        <tr class="border-b">
+            <td class="px-4 py-3 font-semibold text-gray-700">Phone</td>
+            <td class="px-4 py-3">${transaction.phone}</td>
+        </tr>
+        <tr class="border-b">
+            <td class="px-4 py-3 font-semibold text-gray-700">Address</td>
+            <td class="px-4 py-3">${transaction.address}</td>
+        </tr>
+        <tr class="border-b">
+            <td class="px-4 py-3 font-semibold text-gray-700">Order Date</td>
+            <td class="px-4 py-3">${formatDate(transaction.tanggal)}</td>
+        </tr>
+        <tr class="border-b">
+            <td class="px-4 py-3 font-semibold text-gray-700">Total Price</td>
+            <td class="px-4 py-3">${formatCurrency(transaction.total)}</td>
+        </tr>
+        <tr class="border-b">
+            <td class="px-4 py-3 font-semibold text-gray-700">Shipping Method</td>
+            <td class="px-4 py-3">${transaction.pengiriman || "N/A"}</td>
+        </tr>
+        <tr>
+            <td class="px-4 py-3 font-semibold text-gray-700">Payment Method</td>
+            <td class="px-4 py-3">${transaction.method}</td>
+        </tr>
+    `;
+        }
+
+        function createItemRow(item) {
+            return `
+        <tr class="border-b hover:bg-gray-100 transition-colors">
+            <td class="px-4 py-3 text-left font-medium text-gray-700">${item.product_name}</td>
+            <td class="px-4 py-3 text-center text-gray-600">${item.qty}</td>
+            <td class="px-4 py-3 text-right font-medium text-gray-700">${formatCurrency(item.item_price)}</td>
+        </tr>
+    `;
+        }
+
+        function createEmptyRow() {
+            return `<tr><td colspan="3" class="text-center py-4 text-gray-500">No items found</td></tr>`;
+        }
+
+        function displayError(title, message) {
+            document.getElementById("order-details-container").innerHTML = `
+        <div class="bg-red-100 text-red-800 p-6 rounded-lg shadow-md">
+            <p class="text-lg font-semibold">${title}</p>
+            <p>${message}</p>
+        </div>
+    `;
+        }
+
+        function formatDate(dateString) {
+            try {
+                const date = new Date(dateString);
+                const day = String(date.getUTCDate()).padStart(2, '0');
+                const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+                const year = date.getUTCFullYear();
+                return `${day}/${month}/${year}`;
+            } catch (error) {
+                console.error("Error formatting date:", error);
+                return dateString;
+            }
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+        }
+
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
