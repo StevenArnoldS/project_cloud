@@ -245,6 +245,20 @@
   
                   if (response.ok) {
                       const products = data.products;
+
+                      const alerts = data.alerts || [];
+                      if (alerts.length > 0) {
+                        Swal.fire({
+                          title: "Produk Dihapus",
+                          text: `Produk berikut telah dihapus karena stok tidak mencukupi: ${alerts.join(", ")}`,
+                          icon: "warning",
+                          confirmButtonText: "OK",
+                          buttonsStyling: false,
+                          customClass: {
+                            confirmButton: "bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-800",
+                          },
+                        });
+                      }
   
                       // Kelompokkan produk berdasarkan toko
                       const groupedProducts = products.reduce((acc, product) => {
@@ -426,6 +440,6 @@
                 }
               }
             });
-      };
+    };
   </script>  
 </html>
